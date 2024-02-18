@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 
-
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +13,7 @@ const Signup = () => {
     try {
       const response = await axios.post(
         "http://localhost:8000/api/auth/signup",
-        { email, password }
+        { email, password, role }
       );
       console.log(response);
     } catch (error) {
