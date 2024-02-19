@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 
-
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +13,7 @@ const Signup = () => {
     try {
       const response = await axios.post(
         "http://localhost:8000/api/auth/signup",
-        { email, password }
+        { email, password, role }
       );
       console.log(response);
     } catch (error) {
@@ -55,13 +54,34 @@ const Signup = () => {
           <h1 className="font-rubik font-normal font-400 text-5xl text-white leading-65 py-10">
             Sign Up
           </h1>
+          <br />
           <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={role}
-              onChange={handleRoleChange}
-              placeholder="Role"
-            />
+            <div className="flex text-white font-style: Rubik;">
+              <div className="mr-4 ">
+                <input
+                  type="radio"
+                  id="User"
+                  value="User"
+                  name="role"
+                  onChange={handleRoleChange}
+                  placeholder="Role"
+                  className="mr-1"
+                />
+                <label htmlFor="User">User</label>
+              </div>
+
+              <input
+                type="radio"
+                id="Trainer"
+                name="role"
+                value="Trainer"
+                onChange={handleRoleChange}
+                placeholder="Role"
+                className="mr-1"
+              />
+              <label htmlFor="Trainer">Trainer</label>
+            </div>
+
             <input
               type="email"
               value={email}
