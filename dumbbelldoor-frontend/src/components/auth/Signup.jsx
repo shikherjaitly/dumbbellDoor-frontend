@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+// import signup from "../../assets/signup_page.png";
 import { FcGoogle } from "react-icons/fc";
 import axios from "axios";
 
@@ -37,6 +38,14 @@ const Signup = () => {
           "linear-gradient(108.87deg, #00101C 0%, #00101C 0%, #29000F 100%)",
       }}
     >
+      {/* Signup Image on the left */}
+      {/* <img
+        className="absolute inset-0 object-cover w-1/2 h-full"
+        src={signup}
+        alt="signup"
+      /> */}
+
+      {/* Signup Box on the right */}
       <div className="absolute right-0 w-1/2 h-full flex justify-center items-center">
         <div
           className="box-border border-solid border border-white rounded-lg p-10 text-center"
