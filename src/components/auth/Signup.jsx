@@ -12,7 +12,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/auth/signup",
+        "https://dumbbelldoor-backned.onrender.com/api/auth/signup",
         { email, password, role }
       );
       console.log(response);
