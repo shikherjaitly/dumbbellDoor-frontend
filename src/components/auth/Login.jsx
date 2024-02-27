@@ -23,7 +23,11 @@ const Login = () => {
 
   const handleGoogleLogin = () => {
     //window.location.href = "https://dumbbelldoor-backned.onrender.com/auth/google";
-    window.open("https://dumbbelldoor-backned.onrender.com/auth/google", "_blank", "noreferrer");
+    window.open(
+      "https://dumbbelldoor-backned.onrender.com/auth/google",
+      "_blank",
+      "noreferrer"
+    );
   };
 
   return (
@@ -100,15 +104,7 @@ const Login = () => {
                   Login
                 </button>
               </div>
-              <div className="mb-2">
-                <button
-                  type="submit"
-                  className="w-full px-3 py-4 text-white bg-violet-600 rounded-md focus:bg-violet-800 focus:outline-none"
-                  onClick={handleGoogleLogin}
-                >
-                  Login with Google
-                </button>
-              </div>
+
               <p className="text-sm text-center text-gray-400">
                 Don&#x27;t have an account yet?{" "}
                 <a
@@ -120,6 +116,15 @@ const Login = () => {
                 .
               </p>
             </form>
+            <div className="mb-2">
+              <button
+                type="submit"
+                className="w-full px-3 py-4 text-white bg-violet-600 rounded-md focus:bg-violet-800 focus:outline-none"
+                onClick={handleGoogleLogin}
+              >
+                Login with Google
+              </button>
+            </div>
           </div>
         </div>
       </div>
