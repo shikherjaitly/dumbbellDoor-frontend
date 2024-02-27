@@ -22,7 +22,8 @@ const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8000/auth/google";
+    //window.location.href = "https://dumbbelldoor-backned.onrender.com/auth/google";
+    window.open("https://dumbbelldoor-backned.onrender.com/auth/google", "_blank", "noreferrer");
   };
 
   return (
