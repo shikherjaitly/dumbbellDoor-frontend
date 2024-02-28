@@ -1,5 +1,4 @@
-// import ImageContainer from "../components/ImageContainer";
-import CrossfitNutrition from "../components/CrossfitNutrition";
+import TrainerFilter from "../components/TrainerFilter";
 import Navbar from "./Navbar";
 
 const FindTrainers = () => {
@@ -8,7 +7,7 @@ const FindTrainers = () => {
       <div style={{ marginTop: "-2.5rem" }}>
         <Navbar />
       </div>
-      <CrossfitNutrition />
+      <TrainerFilter />
     </div>
   );
 };

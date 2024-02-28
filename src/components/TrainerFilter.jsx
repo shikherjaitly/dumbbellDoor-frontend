@@ -1,5 +1,4 @@
-// import { useCallback } from "react";
-import FrameGroupInstaFbCheckPro from "./FrameGroupInstaFbCheckPro";
+import TrainerCard from "./TrainerCard";
 
 const CrossfitNutrition = () => {
   return (
@@ -105,7 +104,7 @@ const CrossfitNutrition = () => {
           </div>
           <div className="flex-1 flex flex-col items-start justify-start pt-[0.938rem] px-[0rem] pb-[0rem] box-border max-w-[calc(100%_-_293px)] text-left text-[0.875rem] text-black mq750:max-w-full">
             <div>
-              <FrameGroupInstaFbCheckPro />
+              <TrainerCard />
             </div>
           </div>
         </div>

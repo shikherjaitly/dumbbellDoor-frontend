@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import axios from "axios";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const FrameGroupInstaFbCheckPro = ({ propWidth, propGap }) => {
   const frameGroupInstaFbCheckProStyle = useMemo(() => {
@@ -28,7 +29,6 @@ const FrameGroupInstaFbCheckPro = ({ propWidth, propGap }) => {
 
   return (
     <div
-      //   className="w-[46rem] overflow-x-auto flex flex-row items-start justify-start py-[0rem] pr-[0.188rem] pl-[0rem] box-border gap-[0rem_4.125rem] max-w-full text-left text-[0.938rem] text-black font-rubik mq750:gap-[0rem_4.125rem] mq450:gap-[0rem_4.125rem]"
       className="grid grid-cols-3 gap-14 "
       style={frameGroupInstaFbCheckProStyle}
     >
@@ -82,9 +82,12 @@ const FrameGroupInstaFbCheckPro = ({ propWidth, propGap }) => {
                   <FaInstagram />
                 </span>
 
-                <div className="rounded-3xs bg-white flex flex-row items-center justify-center pt-[0.188rem] pb-[0.25rem] pr-[0.813rem] pl-[0.75rem] whitespace-nowrap z-[1] cursor-pointer rounded-xl font-semibold hover:bg-black hover:text-white transition-all">
+                <Link
+                  to={`/trainer/${trainer.name}/${trainer._id}`}
+                  className="rounded-3xs bg-white flex flex-row items-center justify-center pt-[0.188rem] pb-[0.25rem] pr-[0.813rem] pl-[0.75rem] whitespace-nowrap z-[1] cursor-pointer rounded-xl font-semibold hover:bg-black hover:text-white transition-all"
+                >
                   Check profile
-                </div>
+                </Link>
               </div>
             </div>
           </div>

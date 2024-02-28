@@ -1,1 +1,0 @@
-Contains the assets : images and other assets

@@ -2,10 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import Home from "./components/Home";
-// import Trainers from "./components/Trainers";
-import Navbar from "./components/Navbar";
 import FindTrainers from "./components/FindTrainers";
-import ImageContainer from "./components/ImageContainer";
+import TrainerProfile from "./components/TrainerProfile";
 
 export default function App() {
   return (
@@ -15,6 +13,10 @@ export default function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/trainers" element={<FindTrainers />} />
+        <Route
+          path="/trainer/:trainerName/:trainerID"
+          element={<TrainerProfile />}
+        />
       </Routes>
     </div>
   );
