@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <div
       //  className=" [background:linear-gradient(108.87deg,_#00101c,_#00101c,_#29000f)]  flex justify-around items-center gap-80 pt-4 pb-4"
-      className=" bg-inherit flex justify-around items-center gap-80 pt-4 pb-4"
+      className=" bg-inherit flex justify-around items-center gap-96 pt-4 pb-4"
     >
       <Link to="/">
         {" "}
