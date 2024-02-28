@@ -1,7 +1,5 @@
-/* TODO 
-  make responsive for mobile devices
-  remove navbar
- */
+
+//update
 import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
