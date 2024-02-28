@@ -2,7 +2,12 @@
 
 import React, { useState } from "react";
 import dumbbelldoorLogo from "../../assets/dumbbelldoorLogo.png";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { FcGoogle } from "react-icons/fc";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,29 +15,29 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       const response = await axios.post(
         "https://dumbbelldoor-backned.onrender.com/api/auth/login",
         { email, password }
       );
-      console.log(response);
+      console.log(response.data.message);
+      toast.success(response.data.message);
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data.message);
+      toast.error(error.response.data.message);
     }
   };
-
-  const handleGoogleLogin = () => {
-    //window.location.href = "https://dumbbelldoor-backned.onrender.com/auth/google";
-    window.open(
-      "https://dumbbelldoor-backned.onrender.com/auth/google",
-      "_blank",
-      "noreferrer"
-    );
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   return (
     <div
-      className="relative w-screen h-screen flex justify-center items-center"
+      className="relative w-screen h-screen flex flex-col justify-center items-center"
       style={{
         background: "linear-gradient(to right, #29000F, #00101C)",
       }}
@@ -42,19 +47,32 @@ const Login = () => {
         alt="Logo"
         className="absolute top-0 left-0 m-4 max-w-full h-auto w-24  md:w-44 lg:w-48 xl:w-64"
       />
-      <div className="container mx-auto w-96 border-2 border-gray-500 rounded-md">
+      <div className="container mx-auto w-96 border-2 border-gray-500 rounded-xl">
         <div className="max-w-md mx-auto my-10">
           <div className="text-center">
             <h1 className="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">
               Login
             </h1>
-            <p className="text-gray-500 dark:text-gray-400">
-              Login to access your account
-            </p>
+            <div className="mb-2 flex justify-center py-2">
+              <button
+                type="submit"
+                className="px-10 py-1 my-4 flex items-center justify-center text-white bg-blue-600 rounded-full focus:bg-blue-700 focus:outline-none"
+                // onClick={handleGoogleLogin}
+              >
+                <FcGoogle className="mr-5" />
+                Login with Google
+              </button>
+            </div>
           </div>
+
+          <hr className=" w-[90%] m-auto h-[0.05rem] bg-gray-500 border-0" />
+
           <div className="m-7">
+            {/* Main input Form */}
+
             <form onSubmit={handleSubmit}>
-              <div className="mb-6">
+              {/* email and password */}
+              <div className="mb-6 mt-6">
                 <label
                   for="email"
                   className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
@@ -65,9 +83,10 @@ const Login = () => {
                   type="email"
                   id="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  onChange={handleEmailChange}
                   placeholder="you@company.com"
-                  className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                  className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                 />
               </div>
               <div className="mb-4">
@@ -83,9 +102,10 @@ const Login = () => {
                   type="password"
                   id="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  onChange={handlePasswordChange}
                   placeholder="Your Password"
-                  className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                  className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                 />
                 <div className="flex justify-between mb-2">
                   <a
@@ -99,35 +119,27 @@ const Login = () => {
               <div className="mb-2">
                 <button
                   type="submit"
-                  className="w-full px-3 py-4 text-white bg-violet-600 rounded-md focus:bg-violet-800 focus:outline-none"
+                  className="w-full px-3 py-4 text-white bg-violet-600 rounded-xl focus:bg-violet-800 focus:outline-none"
                 >
                   Login
                 </button>
               </div>
 
               <p className="text-sm text-center text-gray-400">
-                Don&#x27;t have an account yet?{""}
+                Don't have an Account?{" "}
                 <a
-                  href="http://localhost:3000/signup"
+                  href="https://dumbbelldoor.netlify.app/signup"
                   className="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800"
                 >
-                  Sign up
+                  Signup
                 </a>
                 .
               </p>
             </form>
-            <div className="mb-2">
-              <button
-                type="submit"
-                className="w-full px-3 py-4 text-white bg-violet-600 rounded-md focus:bg-violet-800 focus:outline-none"
-                onClick={handleGoogleLogin}
-              >
-                Login with Google
-              </button>
-            </div>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
