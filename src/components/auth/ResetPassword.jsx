@@ -18,7 +18,7 @@ const ResetPassword = () => {
 
     try {
       const response = await axios.post(
-        `http://localhost:8000/api/auth/reset-password/${token}`,
+        `https://dumbbelldoor-backned.onrender.com/api/auth/reset-password/${token}`,
         { newPassword }
       );
       console.log(response.data.message);

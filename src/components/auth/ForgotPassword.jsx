@@ -17,7 +17,7 @@ const ForgotPassword = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/auth/forgot-password",
+        "https://dumbbelldoor-backned.onrender.com/api/auth/forgot-password",
         { email }
       );
       console.log(response.data.message);
