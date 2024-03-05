@@ -67,7 +67,7 @@ const Navbar = () => {
         <div className="hidden">
           <a
             className="py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200"
-            href="#"
+            href=""
           >
             Sign In
           </a>
