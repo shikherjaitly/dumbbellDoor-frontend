@@ -16,7 +16,7 @@ const FrameGroupInstaFbCheckPro = ({ propWidth, propGap }) => {
   const getTrainers = async () => {
     try {
       await axios
-        .get("http://localhost:8000/api/trainer/getTrainers")
+        .get("https://dumbbelldoor-backned.onrender.com/api/trainer/getTrainers")
         .then((data) => setTrainers(data.data.message));
     } catch (error) {
       console.log(error.response.data.message);

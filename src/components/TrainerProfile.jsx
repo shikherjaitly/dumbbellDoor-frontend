@@ -14,7 +14,7 @@ const TrainerProfile = () => {
     const fetchTrainerDetails = async () => {
       try {
         const trainerData = await axios.get(
-          `http://localhost:8000/api/trainer/fetchTrainerDetails/${trainerID}`
+          `https://dumbbelldoor-backned.onrender.com/api/trainer/fetchTrainerDetails/${trainerID}`
         );
         setTrainer(trainerData.data.message);
       } catch (error) {
