@@ -32,7 +32,7 @@ const Navbar = () => {
             </svg>
           </button>
         </div>
-        <ul className="hidden lg:flex lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-10 mt-5">
+        <ul className="hidden lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-10 mt-5">
           <li>
             <Link
               className="text-lg text-gray-400 hover:text-gray-500 transition-all"
@@ -65,20 +65,20 @@ const Navbar = () => {
           </li>
         </ul>
         <div className="hidden">
-          <a
+          <Link
             className="py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200"
-            href=""
+            to="/login"
           >
             Sign In
-          </a>
+          </Link>
         </div>
         <div className="hidden">
-          <a
+          <Link
             className="py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-            href="#"
+            to="/signup"
           >
             Sign up
-          </a>
+          </Link>
         </div>
       </nav>
       <div className={isOpen ? "navbar-menu block" : "navbar-menu hidden"}>
@@ -145,7 +145,7 @@ const Navbar = () => {
             <div className="pt-6">
               <Link
               to="/login"
-              className="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
+              className="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
               >
               Sign in
               </Link>
