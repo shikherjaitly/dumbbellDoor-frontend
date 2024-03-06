@@ -64,23 +64,24 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <div className="hidden">
-          <Link
-            className="py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold rounded-xl transition duration-200"
-            to="/login"
-          >
-            Sign In
-          </Link>
-        </div>
-        <div className="hidden">
-          <Link
-            className="py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
-            to="/signup"
-          >
-            Sign up
-          </Link>
-        </div>
       </nav>
+      <div className="absolute bottom-0 left-0 right-0 flex justify-center mb-8">
+      <div className="pt-6 flex">
+        <Link
+          to="/signup"
+          className="flex items-center justify-center block px-20 mb-3 py-4 text-sm text-center font-semibold leading-none bg-lime-400 hover:bg-lime-400 rounded-xl mr-4"
+        >
+          Sign Up
+        </Link>
+        <Link
+          to="/login"
+          className="flex items-center justify-center block px-20 mb-3 py-4 text-sm text-center text-black font-semibold bg-sky-400 hover:bg-sky-400 rounded-xl"
+        >
+          Login
+        </Link>
+      </div>
+      </div>
+    
       <div className={isOpen ? "navbar-menu block" : "navbar-menu hidden"}>
         <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
         <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-neutral-700 border-r overflow-y-auto">
