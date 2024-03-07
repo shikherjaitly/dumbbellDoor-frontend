@@ -1,5 +1,5 @@
-import TrainerFilter from "../components/TrainerFilter";
-import Navbar from "./Navbar";
+import TrainerFilter from "../TrainerFilter";
+import Navbar from "../Navbar";
 
 const FindTrainers = () => {
   return (

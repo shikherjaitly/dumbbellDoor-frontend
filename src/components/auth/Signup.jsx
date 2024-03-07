@@ -1,12 +1,11 @@
-
-//update
 import React, { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
 // import signup from "../../assets/signup_page.png";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import dumbbelldoorLogo from "../../assets/dumbbelldoorLogo.png";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 // import Navbar from "../Navbar.jsx";
 
@@ -58,7 +57,7 @@ const Signup = () => {
             <h1 className="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">
               Sign Up
             </h1>
-            <div className="mb-2 flex justify-center py-2">
+            {/* <div className="mb-2 flex justify-center py-2">
               <button
                 type="submit"
                 className="px-10 py-1 my-4 flex items-center justify-center text-white bg-blue-600 rounded-full focus:bg-blue-700 focus:outline-none"
@@ -67,10 +66,10 @@ const Signup = () => {
                 <FcGoogle className="mr-5" />
                 Signup with Google
               </button>
-            </div>
+            </div> */}
           </div>
 
-          <hr className=" w-[90%] m-auto h-[0.05rem] bg-gray-500 border-0" />
+          {/* <hr className=" w-[90%] m-auto h-[0.05rem] bg-gray-500 border-0" /> */}
 
           <div className="m-7">
             {/* Main input Form */}
@@ -142,10 +141,10 @@ const Signup = () => {
                   className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                 />
               </div>
-              <div className="mb-2">
+              <div className="mb-2 mt-8">
                 <button
                   type="submit"
-                  className="w-full px-3 py-4 text-white bg-violet-600 rounded-xl focus:bg-violet-800 focus:outline-none"
+                  className="w-full px-3 py-4 text-white bg-violet-600 rounded-xl hover:bg-violet-700 focus:bg-violet-700 transition-all focus:outline-none"
                 >
                   Register
                 </button>
@@ -153,12 +152,12 @@ const Signup = () => {
 
               <p className="text-sm text-center text-gray-400">
                 Already have an account?{" "}
-                <a
-                  href="https://dumbbelldoor.netlify.app/login"
+                <Link
+                  to="/login"
                   className="text-indigo-400 focus:outline-none focus:underline focus:text-indigo-500 dark:focus:border-indigo-800"
                 >
                   Log in
-                </a>
+                </Link>
                 .
               </p>
             </form>
