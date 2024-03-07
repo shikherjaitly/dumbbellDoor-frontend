@@ -65,22 +65,6 @@ const Navbar = () => {
           </li>
         </ul>
       </nav>
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center mb-8">
-      <div className="pt-6 flex">
-        <Link
-          to="/signup"
-          className="flex items-center justify-center block px-20 mb-3 py-4 text-sm text-center font-semibold leading-none bg-lime-400 hover:bg-lime-400 rounded-xl mr-4"
-        >
-          Sign Up
-        </Link>
-        <Link
-          to="/login"
-          className="flex items-center justify-center block px-20 mb-3 py-4 text-sm text-center text-black font-semibold bg-sky-400 hover:bg-sky-400 rounded-xl"
-        >
-          Login
-        </Link>
-      </div>
-      </div>
     
       <div className={isOpen ? "navbar-menu block" : "navbar-menu hidden"}>
         <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>

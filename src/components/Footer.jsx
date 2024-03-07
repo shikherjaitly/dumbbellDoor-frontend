@@ -5,7 +5,7 @@ import whatsApp from "../assets/whatsapp.svg"
 
 const FrameComponent = () => {
   const navigate = useNavigate();
-
+  
   const onFindTrainersText1Click = useCallback(() => {
     navigate('/trainers');
   }, [navigate]);
@@ -99,24 +99,24 @@ const FrameComponent = () => {
             <h1 className="m-0 relative text-inherit leading-[145%] capitalize font-normal font-inherit mq450:text-[1.125rem] mq450:leading-[1.625rem] mq800:text-[1.5rem] mq800:leading-[2.188rem]">
               Utility Pages
             </h1>
-            <div className="w-[10.063rem] flex flex-col items-start justify-start gap-[0.875rem_0rem] text-[1.25rem] text-gray-200 font-lato">
-              <h1 className="m-0 h-[1.438rem] relative text-inherit leading-[145%] capitalize font-semibold font-inherit inline-block shrink-0 mq450:text-[1rem] mq450:leading-[1.438rem]">
+            <div className="w-[10.063rem] flex flex-col items-start justify-start gap-[0.875rem_0rem] text-[1.25rem] text-gray-400 font-light">
+              <h1 className="m-0 h-[1.438rem] relative text-inherit leading-[145%] capitalize inline-block shrink-0 cursor-pointer mq450:text-[1rem] mq450:leading-[1.438rem] hover:text-gray-500">
                 <p className="m-0">Home</p>
               </h1>
               <h1
-                className="m-0 h-[1.438rem] relative text-inherit leading-[145%] capitalize font-semibold font-inherit inline-block shrink-0 cursor-pointer mq450:text-[1rem] mq450:leading-[1.438rem]"
+                className="m-0 h-[1.438rem] relative text-inherit leading-[145%] capitalize inline-block shrink-0 cursor-pointer mq450:text-[1rem] mq450:leading-[1.438rem]  hover:text-gray-500"
                 onClick={onFindTrainersText1Click}
               >
                 <p className="m-0">Find Trainers</p>
               </h1>
               <h1
-                className="m-0 self-stretch h-[1.438rem] relative text-inherit leading-[145%] capitalize font-semibold font-inherit inline-block shrink-0 cursor-pointer mq450:text-[1rem] mq450:leading-[1.438rem]"
+                className="m-0 self-stretch h-[1.438rem] relative text-inherit leading-[145%] capitalize inline-block shrink-0 cursor-pointer mq450:text-[1rem] mq450:leading-[1.438rem]  hover:text-gray-500"
                 onClick={onOurOfferingsText1Click}
               >
                 <p className="m-0">Our offerings</p>
               </h1>
               <h1
-                className="m-0 h-[1.438rem] relative text-inherit leading-[145%] capitalize font-semibold font-inherit inline-block shrink-0 cursor-pointer mq450:text-[1rem] mq450:leading-[1.438rem]"
+                className="m-0 h-[1.438rem] relative text-inherit leading-[145%] capitalize inline-block shrink-0 cursor-pointer mq450:text-[1rem] mq450:leading-[1.438rem]  hover:text-gray-500"
                 onClick={onTestimonialsText2Click}
               >
                 <p className="m-0">Testimonials</p>
