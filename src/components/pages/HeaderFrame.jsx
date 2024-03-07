@@ -92,13 +92,11 @@ const HeaderFrame = () => {
           <div className="w-[104.063rem] flex flex-row items-start justify-start py-[0rem] px-[0rem] box-border max-w-[116%] shrink-0">
             <div className="w-[127.375rem] bg-yellowgreen flex flex-row items-center justify-start py-[1.313rem] px-[16.25rem] box-border max-w-[122%] shrink-0 mq450:pl-[1.25rem] mq450:pr-[1.25rem] mq450:box-border mq800:pl-[4.063rem] mq800:pr-[4.063rem] mq800:box-border mq1325:pl-[8.125rem] mq1325:pr-[8.125rem] mq1325:box-border">
               <div className="h-[5.375rem] w-[127.375rem] relative bg-yellowgreen hidden max-w-full" />
-              <marquee>
-                <h1 className="m-0 relative text-inherit tracking-[0.35em] leading-[110%] font-bold font-inherit z-[1] mq450:text-[1.5rem] mq450:leading-[1.625rem] mq800:text-[2rem] mq800:leading-[2.188rem]">
-                  <span className="whitespace-pre-wrap">{`FOCUS ON YOUR `}</span>
-                  <span className="text-black">FITNESS</span>
-                  <span className="whitespace-pre-wrap"> NOT YOUR LOSS</span>
-                </h1>
-              </marquee>
+              <h1 className="m-0 relative text-inherit tracking-[0.35em] leading-[110%] font-bold font-inherit z-[1] mq450:text-[1.5rem] mq450:leading-[1.625rem] mq800:text-[2rem] mq800:leading-[2.188rem]">
+                <span className="whitespace-pre-wrap">{`FOCUS ON YOUR `}</span>
+                <span className="text-black">FITNESS</span>
+                <span className="whitespace-pre-wrap"> NOT YOUR LOSS</span>
+              </h1>
             </div>
           </div>
         </section>
