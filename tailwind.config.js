@@ -32,6 +32,7 @@ module.exports = {
         "3xs": "10px",
         "6xl": "25px",
       },
+
     },
     
     
