@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import backgroundImage from "../assets/homeBackground.png"
+import HeaderFrame from "./pages/HeaderFrame";
 
 const Home = () => {
   return (
@@ -26,6 +27,8 @@ const Home = () => {
             </h1>
         </div>
       </div>
+      <HeaderFrame />
+
     </div>
   );
 };
