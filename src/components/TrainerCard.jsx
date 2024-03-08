@@ -16,7 +16,9 @@ const FrameGroupInstaFbCheckPro = ({ propWidth, propGap }) => {
   const getTrainers = async () => {
     try {
       await axios
-        .get("https://dumbbelldoor-backned.onrender.com/api/trainer/getTrainers")
+        .get(
+          "https://dumbbelldoor-backned.onrender.com/api/trainer/getTrainers"
+        )
         .then((data) => setTrainers(data.data.message));
     } catch (error) {
       console.log(error.response.data.message);
@@ -44,7 +46,7 @@ const FrameGroupInstaFbCheckPro = ({ propWidth, propGap }) => {
               alt=""
               src={trainer.profilePicture}
             />
-            <div className="self-stretch rounded-3xs [background:linear-gradient(180deg,_rgba(236,_236,_236,_0),_#ececec)] flex flex-col items-center justify-start pt-[7.5rem] px-[0.813rem] pb-[1.25rem] gap-[0.875rem_0rem] mt-[-5.875rem] rounded-lg">
+            <div className="self-stretch [background:linear-gradient(180deg,_rgba(236,_236,_236,_0),_#ececec)] flex flex-col items-center justify-start pt-[7.5rem] px-[0.813rem] pb-[1.25rem] gap-[0.875rem_0rem] mt-[-5.875rem] rounded-lg">
               <div className="w-[12.438rem] h-[14.875rem] relative rounded-3xs [background:linear-gradient(180deg,_rgba(236,_236,_236,_0),_#ececec)] hidden" />
               <div className="self-stretch flex flex-col items-start justify-start py-[0rem] px-[0.063rem] gap-[0.375rem_0rem]">
                 <div className="self-stretch flex flex-row items-start justify-between gap-[1.25rem]">
@@ -84,7 +86,7 @@ const FrameGroupInstaFbCheckPro = ({ propWidth, propGap }) => {
 
                 <Link
                   to={`/trainer/${trainer.name}/${trainer._id}`}
-                  className="rounded-3xs bg-white flex flex-row items-center justify-center pt-[0.188rem] pb-[0.25rem] pr-[0.813rem] pl-[0.75rem] whitespace-nowrap z-[1] cursor-pointer rounded-xl font-semibold hover:bg-black hover:text-white transition-all"
+                  className=" bg-white flex flex-row items-center justify-center pt-[0.188rem] pb-[0.25rem] pr-[0.813rem] pl-[0.75rem] whitespace-nowrap z-[1] cursor-pointer rounded-xl font-normal hover:bg-black hover:text-white transition-all"
                 >
                   Check profile
                 </Link>

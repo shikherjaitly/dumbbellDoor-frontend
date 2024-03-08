@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { Link } from "react-router-dom";
 import tickmark from "../assets/tickmark.png";
 import badge from "../assets/badge.png";
 import services from "../assets/services.png";
@@ -74,9 +75,12 @@ const LineSeparator = ({ trainer }) => {
                           className="cursor-pointer [border:none] pt-2 pb-2 bg-yellowgreen self-stretch rounded-8xs flex flex-row items-center justify-center whitespace-nowrap hover:bg-forestgreen bg-green-500 rounded-lg"
                           onClick={onGroupButtonClick}
                         >
-                          <div className="flex-1 relative text-[1.875rem] font-medium font-rubik text-black text-center z-[1]">
+                          <Link
+                            to={`/trainer/${trainer.name}/${trainer._id}/book-session`}
+                            className="flex-1 relative text-[1.875rem] font-medium font-rubik text-black text-center z-[1]"
+                          >
                             Book a session
-                          </div>
+                          </Link>
                         </button>
                       </div>
                     </div>

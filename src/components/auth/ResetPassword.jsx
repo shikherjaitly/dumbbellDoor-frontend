@@ -5,29 +5,34 @@ import dumbbelldoorLogo from "../../assets/dumbbelldoorLogo.png";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-import { useParams } from "react-router"; 
+import { useParams } from "react-router";
 import { toast } from "react-toastify";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const {token} = useParams();
+  const { token } = useParams();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        `https://dumbbelldoor-backned.onrender.com/api/auth/reset-password/${token}`,
-        { newPassword }
-      );
-      console.log(response.data.message);
-      toast.success(response.data.message);
-    } catch (error) {
-      console.log(error.response.data.message);
-      toast.error(error.response.data.message);
+    if (newPassword !== confirmPassword) {
+      toast.error("Password doesn't match!");
+    } else {
+      try {
+        const response = await axios.post(
+          `https://dumbbelldoor-backned.onrender.com/api/auth/reset-password/${token}`,
+          { newPassword }
+        );
+        console.log(response.data.message);
+        toast.success(response.data.message);
+      } catch (error) {
+        console.log(error.response.data.message);
+        toast.error(error.response.data.message);
+      }
     }
   };
+
   return (
     <div
       className="relative w-screen h-screen flex flex-col justify-center items-center"
