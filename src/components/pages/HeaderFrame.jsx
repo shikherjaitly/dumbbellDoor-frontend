@@ -1,18 +1,16 @@
-
 import FrameComponent1 from "../GroupTestimonials";
 import FrameComponent from "../Footer";
-import one from "../../assets/1.png"
-import two from "../../assets/2.png"
-import three from "../../assets/3.png"
-import four from "../../assets/4.png"
-import five from "../../assets/5.png"
-import footerImage from "../../assets/footer-image.png"
-
+import one from "../../assets/1.jpeg";
+import two from "../../assets/2.jpeg";
+import three from "../../assets/3.jpeg";
+import four from "../../assets/4.jpeg";
+import five from "../../assets/5.jpg";
+import footerImage from "../../assets/footer-image.png";
 
 const HeaderFrame = () => {
   return (
     <div className="w-full h-[180.25rem] relative overflow-hidden tracking-[normal] mq450:h-auto mq450:min-h-[3828]">
-      <main className="absolute h-full w-full top-[0rem] right-[0rem] bottom-[0rem] left-[0rem] [background:linear-gradient(108.87deg,_#00101c,_#29000f,_#00101c)] overflow-hidden flex flex-col items-center justify-start pt-[0rem] px-[0rem] pb-[1.438rem] box-border gap-[2.938rem_0rem] max-w-full text-left text-[1.25rem] text-dimgray-100 font-lato mq800:gap-[2.938rem_0rem]">   
+      <main className="absolute h-full w-full top-[0rem] right-[0rem] bottom-[0rem] left-[0rem] [background:linear-gradient(108.87deg,_#00101c,_#29000f,_#00101c)] overflow-hidden flex flex-col items-center justify-start pt-[0rem] px-[0rem] pb-[1.438rem] box-border gap-[2.938rem_0rem] max-w-full text-left text-[1.25rem] text-dimgray-100 font-lato mq800:gap-[2.938rem_0rem]">
         <section className="w-[66.125rem] flex flex-row items-start justify-start pt-[0rem] pb-[2.375rem] pr-[0rem] pl-[0.688rem] box-border max-w-full text-left text-[2.813rem] text-white font-alata mq1125:max-w-[calc(100%_-_11px)]">
           <div className="flex-1 flex flex-col items-center justify-start gap-[3.875rem_0rem] max-w-full mq800:gap-[3.875rem_0rem] mq1125:gap-[3.875rem_0rem]">
             <div className="flex flex-row items-start justify-start py-[0rem] pr-[1.438rem] pl-[0rem] mq450:max-w-[calc(100%_-_23px)]">
@@ -27,29 +25,29 @@ const HeaderFrame = () => {
               <div className="h-[29.75rem] w-[29.938rem] relative min-w-[29.938rem] max-w-full mq800:min-w-full mq1125:flex-1">
                 <div className="absolute h-full w-full top-[0rem] right-[0rem] bottom-[0rem] left-[0rem]">
                   <img
-                    className="absolute top-[0rem] left-[0rem] w-[12.5rem] h-[12.5rem] object-cover"
+                    className="absolute top-[0rem] left-[0rem] w-[12.5rem] h-[12.5rem] object-cover border-4 border-white"
                     alt=""
                     src={four}
                   />
                   <img
-                    className="absolute top-[17.25rem] left-[0rem] w-[12.5rem] h-[12.5rem] object-cover"
+                    className="absolute top-[17.25rem] left-[0rem] w-[12.5rem] h-[12.5rem] object-cover border-4 border-white"
                     alt=""
                     src={one}
                   />
                   <img
-                    className="absolute top-[0rem] left-[17.438rem] w-[12.5rem] h-[12.5rem] object-cover"
+                    className="absolute top-[0rem] left-[17.438rem] w-[12.5rem] h-[12.5rem] object-cover border-4 border-white"
                     loading="eager"
                     alt=""
                     src={five}
                   />
                   <img
-                    className="absolute top-[17.25rem] left-[17.438rem] w-[12.5rem] h-[12.5rem] object-cover"
+                    className="absolute top-[17.25rem] left-[17.438rem] w-[12.5rem] h-[12.5rem] object-cover border-4 border-white"
                     loading="eager"
                     alt=""
                     src={three}
                   />
                   <img
-                    className="absolute top-[6.25rem] left-[6.25rem] w-[18.25rem] h-[17.25rem] object-cover z-[1]"
+                    className="absolute top-[6.25rem] left-[6.25rem] w-[18.25rem] h-[17.25rem] object-cover z-[1] border-4 border-white"
                     alt=""
                     src={two}
                   />
