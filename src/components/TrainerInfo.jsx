@@ -6,9 +6,9 @@ import services from "../assets/services.png";
 import specialization from "../assets/specialization.png";
 import calendar from "../assets/calendar.png";
 import location from "../assets/location.png";
-import one from "../assets/1.png";
-import two from "../assets/2.png";
-import three from "../assets/3.png";
+import one from "../assets/1.jpeg";
+import two from "../assets/2.jpeg";
+import three from "../assets/3.jpeg";
 import t1 from "../assets/t1.jpg";
 import t2 from "../assets/t2.jpg";
 import t3 from "../assets/t3.jpg";
@@ -38,7 +38,7 @@ const LineSeparator = ({ trainer }) => {
                   <div className="self-stretch flex flex-col items-center justify-center gap-[0.938rem_0rem]">
                     <div className="flex flex-row items-start justify-start py-[0rem] px-[0.375rem]">
                       <div className="flex flex-row items-end justify-start gap-[0rem_1.063rem]">
-                        <h1 className="m-0 relative text-[2rem] font-normal font-inherit mq450:text-[1.5rem] mq750:text-[2rem]">
+                        <h1 className="m-0 relative text-[1.8rem] font-normal font-inherit mq450:text-[1.5rem] mq750:text-[2rem]">
                           {trainer.name}
                         </h1>
                         <div className="flex flex-col items-start justify-start pt-[0rem] px-[0rem] pb-[0.5rem]">
@@ -112,7 +112,7 @@ const LineSeparator = ({ trainer }) => {
                     <div className="flex flex-col items-center justify-center gap-[2.938rem_0rem]">
                       <div className="flex flex-row items-center justify-center py-[0rem] pr-[0rem] pl-[0.25rem]">
                         <img
-                          className="h-[3.75rem] w-[3.75rem] relative object-cover"
+                          className="h-[3.75rem] w-[3.75rem] mr-4 relative object-cover"
                           loading="lazy"
                           alt=""
                           src={badge}
@@ -120,25 +120,25 @@ const LineSeparator = ({ trainer }) => {
                       </div>
                       <div className="flex flex-col items-start justify-start gap-[3.188rem_0rem]">
                         <img
-                          className="w-[3.75rem] h-[3.75rem] relative object-cover"
+                          className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
                           loading="lazy"
                           alt=""
                           src={specialization}
                         />
                         <img
-                          className="w-[3.75rem] h-[3.75rem] relative"
+                          className="w-[3.75rem] h-[3.75rem] mr-4 relative"
                           loading="lazy"
                           alt=""
                           src={services}
                         />
                         <img
-                          className="w-[3.75rem] h-[3.75rem] relative object-cover"
+                          className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
                           loading="lazy"
                           alt=""
                           src={calendar}
                         />
                         <img
-                          className="w-[3.75rem] h-[3.75rem] relative object-cover"
+                          className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
                           loading="lazy"
                           alt=""
                           src={location}
@@ -166,7 +166,7 @@ const LineSeparator = ({ trainer }) => {
                         </div>
                         <div className="relative">{`S P E C I A L I Z A T I O N `}</div>
                       </div>
-                      <div className="self-stretch flex flex-row items-start justify-start gap-[0rem_0.875rem] text-white mq450:flex-wrap">
+                      <div className=" self-stretch flex flex-row items-start justify-start gap-[0rem_0.875rem] text-white mq450:flex-wrap">
                         <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
                           Weight Loss
                         </p>
@@ -174,7 +174,7 @@ const LineSeparator = ({ trainer }) => {
                           Muscle Building
                         </p>
                         <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                          Functional Training
+                          Functional
                         </p>
                       </div>
                     </div>

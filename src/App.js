@@ -8,6 +8,7 @@ import TrainerRegistration from "./components/pages/TrainerRegistration";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
 import BookingPage from "./components/pages/BookingPage";
+import EditBooking from "./components/pages/EditBooking";
 
 export default function App() {
   return (
@@ -30,6 +31,10 @@ export default function App() {
         <Route
           path="/trainer/:trainerName/:trainerID/book-session"
           element={<BookingPage />}
+        />
+        <Route
+          path="/trainer/:trainerName/:trainerID/edit-booking"
+          element={<EditBooking />}
         />
       </Routes>
     </div>
