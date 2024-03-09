@@ -65,9 +65,9 @@ const GroupComponent = ({
                 src={fb}
               />
             </div>
-            <button className="cursor-pointer [border:none] pt-[0.313rem] pb-[0.25rem] pr-[0.563rem] pl-[1.375rem] bg-white w-[7rem] rounded-3xs flex flex-row items-center justify-end box-border whitespace-nowrap z-[1] hover:bg-gainsboro">
+            <button className="cursor-pointer [border:none] pt-[0.313rem] pb-[0.25rem] pr-[0.563rem] pl-[1.375rem] bg-white w-[7rem] rounded-3xs flex flex-row items-center justify-end box-border whitespace-nowrap z-[1] text-black hover:text-white transition-all hover:bg-black">
               <div className="h-[1.669rem] w-[7.013rem] relative rounded-3xs bg-white hidden" />
-              <div className="h-[1.113rem] flex-1 relative text-[0.625rem] leading-[145%] capitalize font-rubik text-black text-left inline-block z-[1]">
+              <div className="h-[1.113rem] flex-1 relative text-[0.625rem] leading-[145%] capitalize font-rubik text-left inline-block z-[1]">
                 Check profile
               </div>
             </button>
