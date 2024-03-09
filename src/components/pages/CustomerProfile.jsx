@@ -1,7 +1,6 @@
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Navbar.jsx";
 import avatar from "../../assets/t1.jpg";
-import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 const CustomerProfile = () => {

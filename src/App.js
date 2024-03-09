@@ -35,10 +35,7 @@ export default function App() {
           path="/trainer/:trainerName/:trainerID/book-session"
           element={<BookingPage />}
         />
-        <Route
-          path="/trainer/:trainerName/:trainerID/edit-booking"
-          element={<EditBooking />}
-        />
+        <Route path="/edit-booking" element={<EditBooking />} />
         <Route path="/my-bookings" element={<CustomerBookings />} />
       </Routes>
     </div>
