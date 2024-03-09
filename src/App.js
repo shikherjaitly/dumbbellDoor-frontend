@@ -9,6 +9,8 @@ import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
 import BookingPage from "./components/pages/BookingPage";
 import EditBooking from "./components/pages/EditBooking";
+import CustomerProfile from "./components/pages/CustomerProfile";
+import CustomerBookings from "./components/pages/CustomerBookings";
 
 export default function App() {
   return (
@@ -28,14 +30,13 @@ export default function App() {
           path="/trainer/:trainerName/:trainerID"
           element={<TrainerProfile />}
         />
+        <Route path="/customer" element={<CustomerProfile />} />
         <Route
           path="/trainer/:trainerName/:trainerID/book-session"
           element={<BookingPage />}
         />
-        <Route
-          path="/trainer/:trainerName/:trainerID/edit-booking"
-          element={<EditBooking />}
-        />
+        <Route path="/edit-booking" element={<EditBooking />} />
+        <Route path="/my-bookings" element={<CustomerBookings />} />
       </Routes>
     </div>
   );
