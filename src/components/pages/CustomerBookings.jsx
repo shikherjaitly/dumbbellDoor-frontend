@@ -1,6 +1,5 @@
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Navbar.jsx";
-import avatar from "../../assets/t1.jpg";
 import { Link } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 
