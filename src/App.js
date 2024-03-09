@@ -11,6 +11,7 @@ import BookingPage from "./components/pages/BookingPage";
 import EditBooking from "./components/pages/EditBooking";
 import CustomerProfile from "./components/pages/CustomerProfile";
 import CustomerBookings from "./components/pages/CustomerBookings";
+import CustomerRegistration from "./components/pages/CustomerRegistration";
 
 export default function App() {
   return (
@@ -25,6 +26,10 @@ export default function App() {
         <Route
           path="/trainer/build-your-profile"
           element={<TrainerRegistration />}
+        />
+        <Route 
+          path="/customer/your-details"
+          element={<CustomerRegistration />}
         />
         <Route
           path="/trainer/:trainerName/:trainerID"
