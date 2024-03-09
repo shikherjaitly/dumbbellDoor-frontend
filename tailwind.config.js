@@ -11,11 +11,12 @@ module.exports = {
         blueviolet: "#524ff5",
         deepskyblue: "#38b6ff",
         yellowgreen: "#7ed957",
-        
         silver: "#bcbcbc",
         blue: "#7206ff",
         gainsboro: "#e6e6e6",
         black: "#000",
+        white: "#fff",
+        whitesmoke: "#f3f3f3",
       },
       spacing: {
         '-180': '-45rem', // Customize the value as needed
@@ -34,7 +35,6 @@ module.exports = {
       },
 
     },
-    
     
   },
   
