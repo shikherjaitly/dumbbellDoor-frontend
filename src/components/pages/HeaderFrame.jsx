@@ -173,7 +173,7 @@ const HeaderFrame = () => {
           </div>
         </section>
         <FrameComponent />
-        <div className="w-[30rem] flex flex-row items-start justify-start py-[rem] px-[1.25rem] box-border max-w-full -mt-12">
+        <div className="w-[30rem] flex flex-row items-start justify-start py-[rem] px-[1.25rem] box-border max-w-full -mt-32 ml-20">
           <h1 className="m-0 relative text-inherit leading-[242.5%] capitalize font-inherit mq450:text-[1rem] mq450:leading-[2.438rem]">
             <span className="font-medium">{`Copyright © `}</span>
             <b className="text-yellowgreen">
