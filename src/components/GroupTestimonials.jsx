@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { Button } from "@mui/material";
 import GroupComponent from "./CardComponent";
-import TestimonialsSection from "./TestimonialsCards";
+import TestimonialsCarousel from "./TestimonialsCards";
 import t1 from "../assets/t1.jpg"
 import t2 from "../assets/t2.jpg"
 import t3 from "../assets/t3.jpg"
@@ -83,7 +83,7 @@ const FrameComponent1 = () => {
           </Button>
         </div>
       </div>
-      <TestimonialsSection /> 
+      <TestimonialsCarousel  /> 
     </div>
   );
 };
