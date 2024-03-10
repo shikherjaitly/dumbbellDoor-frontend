@@ -1,33 +1,15 @@
-import { useMemo, useState } from "react";
-import axios from "axios";
+import { useMemo } from "react";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const FrameGroupInstaFbCheckPro = ({ propWidth, propGap }) => {
+const FrameGroupInstaFbCheckPro = ({ propWidth, propGap, trainers }) => {
   const frameGroupInstaFbCheckProStyle = useMemo(() => {
     return {
       width: propWidth,
       gap: propGap,
     };
   }, [propWidth, propGap]);
-
-  const [trainers, setTrainers] = useState([]);
-  const getTrainers = async () => {
-    try {
-      await axios
-        .get(
-          "https://dumbbelldoor-backned.onrender.com/api/trainer/getTrainers"
-        )
-        .then((data) => setTrainers(data.data.message));
-    } catch (error) {
-      console.log(error.response.data.message);
-    }
-  };
-
-  useState(() => {
-    getTrainers();
-  }, []);
 
   return (
     <div
@@ -53,7 +35,9 @@ const FrameGroupInstaFbCheckPro = ({ propWidth, propGap }) => {
                   <div className="relative font-medium z-[1]">
                     {trainer.name}
                   </div>
-                  <div className="relative font-medium z-[1]">5 ⭐</div>
+                  <div className="relative font-medium z-[1]">
+                    {trainer.rating} ⭐
+                  </div>
                 </div>
                 <img
                   className="self-stretch h-[0.063rem] relative max-w-full overflow-hidden shrink-0 object-contain z-[1]"
