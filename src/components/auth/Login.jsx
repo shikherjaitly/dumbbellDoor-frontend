@@ -19,12 +19,21 @@ const Login = () => {
     try {
       const response = await axios.post(
         "https://dumbbelldoor-backned.onrender.com/api/auth/login",
-        { email, password }
+        { email, password },
+        // {authorization : document.cookies.accessToken}
+        // { withCredentials: true }
       );
+      
+      console.log(response);
+      document.cookie = `email=${response.data.responseData.userEmail}; path=/`;
+      document.cookie = `token=${response.data.responseData.accessToken}; path=/`;
+
       console.log(response.data.message);
       toast.success(response.data.message);
+
+      window.location.href = "/";
     } catch (error) {
-      console.log(error.response.data.message);
+      console.log(error);
       toast.error(error.response.data.message);
     }
   };
