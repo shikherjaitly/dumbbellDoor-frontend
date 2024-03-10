@@ -55,6 +55,7 @@ const Navbar = () => {
               Contact Us 
             </Link>
           </li>
+          {/* if (req.cookies.accessToken) render dynamically*/}
           <li>
             <Link
               className="text-lg text-gray-400 hover:text-gray-500 transition-all"
