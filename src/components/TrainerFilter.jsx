@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import TrainerCard from "./TrainerCard";
-import { UserContext } from "../utils/Context";
+import { UserContext } from "../utils/UserContext";
 
 const CrossfitNutrition = () => {
   const { trainers } = useContext(UserContext);
