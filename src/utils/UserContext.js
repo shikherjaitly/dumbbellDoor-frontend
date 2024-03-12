@@ -1,10 +1,28 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
 
 export const UserContext = createContext();
 
 const ContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
+  const [trainers, setTrainers] = useState([]);
+
+  const getTrainers = async () => {
+    try {
+      await axios
+        .get(
+          "https://dumbbelldoor-backned.onrender.com/api/trainer/getTrainers"
+        )
+        .then((data) => setTrainers(data.data.message));
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
+
+  useEffect(() => {
+    getTrainers();
+  }, []);
 
   const loginUser = async () => {
     // Get all cookies
@@ -46,6 +64,7 @@ const ContextProvider = ({ children }) => {
 
   const value = {
     user,
+    trainers,
     loginUser,
     // fetchUserDetails,
   };
