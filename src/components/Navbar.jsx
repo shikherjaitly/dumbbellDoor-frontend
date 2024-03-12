@@ -11,7 +11,7 @@ const Navbar = () => {
   useEffect(() => {
     // Call the loginUser function when the component mounts
     loginUser();
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, [loginUser]); // Empty dependency array ensures this effect runs only once
 
   const [isOpen, setIsOpen] = useState(false);
 

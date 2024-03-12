@@ -16,7 +16,7 @@ const TrainerProfile = () => {
   useEffect(() => {
     // Call the loginUser function when the component mounts
     loginUser();
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, [loginUser]); // Empty dependency array ensures this effect runs only once
 
   useEffect(() => {
     const fetchTrainerDetails = async () => {

@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Navbar from "./Navbar";
 import backgroundImage from "../assets/homeBackground.png";
 import HeaderFrame from "./pages/HeaderFrame";
 import { Link } from "react-router-dom";
 import { useUserContext } from "../utils/UserContext";
-import axios from "axios";
 
 const Home = () => {
-  const { user, loginUser } = useUserContext();
+  const { loginUser } = useUserContext();
 
   useEffect(() => {
     // Call the loginUser function when the component mounts
     loginUser();
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, [loginUser]); // Empty dependency array ensures this effect runs only once
 
   return (
     <div className=" w-full overflow-hidden">
