@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import dumbbelldoorLogo from "../assets/dumbbelldoorLogo.png";
+import { useUserContext } from "../utils/UserContext";
+// import { useUserContext } from "../utils/UserContext";
 
 const Navbar = () => {
+  // const { user } = useUserContext();
+  const { user, loginUser } = useUserContext();
+
+  useEffect(() => {
+    // Call the loginUser function when the component mounts
+    loginUser();
+  }, []); // Empty dependency array ensures this effect runs only once
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -13,7 +23,11 @@ const Navbar = () => {
     <>
       <nav className="relative px-14 py-4 flex justify-between items-center bg-transparent">
         <Link className="mr-auto text-3xl font-bold leading-none" to="/">
-          <img className="mt-4 pl-0 md:pl-4 pr-4 h-12 md:h-16 lg:mr-72" src={dumbbelldoorLogo} alt="logo" />
+          <img
+            className="mt-4 pl-0 md:pl-4 pr-4 h-12 md:h-16 lg:mr-72"
+            src={dumbbelldoorLogo}
+            alt="logo"
+          />
         </Link>
 
         <div className="lg:hidden">
@@ -25,7 +39,7 @@ const Navbar = () => {
               className="block h-8 w-8"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
-              style={{ fill: '#36b6ff' }} 
+              style={{ fill: "#36b6ff" }}
             >
               <title>Mobile menu</title>
               <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
@@ -42,31 +56,33 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link
-              className="text-lg text-gray-400 hover:text-gray-500 transition-all"
-            >
+            <Link className="text-lg text-gray-400 hover:text-gray-500 transition-all">
               Testimonials
             </Link>
           </li>
           <li>
-            <Link
-              className="text-lg text-gray-400 hover:text-gray-500 transition-all"
-            >
-              Contact Us 
+            <Link className="text-lg text-gray-400 hover:text-gray-500 transition-all">
+              Contact Us
             </Link>
           </li>
           {/* if (req.cookies.accessToken) render dynamically*/}
           <li>
             <Link
               className="text-lg text-gray-400 hover:text-gray-500 transition-all"
-              to="/login"
+              to={`${
+                user
+                  ? user.role === "Trainer"
+                    ? `/trainer/${user.name}/${user._id}`
+                    : `/customer/${user.name}/${user._id}`
+                  : "/login"
+              }`}
             >
-              Login/Signup
+              {user ? "My Profile" : "Login/Signup"}
             </Link>
           </li>
         </ul>
       </nav>
-    
+
       <div className={isOpen ? "navbar-menu block" : "navbar-menu hidden"}>
         <div className="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
         <nav className="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-neutral-700 border-r overflow-y-auto">
@@ -130,10 +146,10 @@ const Navbar = () => {
           <div className="mt-auto">
             <div className="pt-6">
               <Link
-              to="/login"
-              className="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
+                to="/login"
+                className="block px-4 py-3 mb-3 text-xs text-center font-semibold leading-none bg-gray-50 hover:bg-gray-100 rounded-xl"
               >
-              Sign in
+                Sign in
               </Link>
               <Link
                 to="/signup"

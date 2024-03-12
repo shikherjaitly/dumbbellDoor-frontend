@@ -16,7 +16,8 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaSquareWhatsapp } from "react-icons/fa6";
 
-const LineSeparator = ({ trainer }) => {
+const LineSeparator = ({ trainer, user }) => {
+  console.log(user);
   const onGroupButtonClick = useCallback(() => {
     // Please sync "Booking Page" to the project
   }, []);
@@ -71,17 +72,21 @@ const LineSeparator = ({ trainer }) => {
                             {trainer.phoneNumber}
                           </div>
                         </div>
-                        <button
-                          className="cursor-pointer [border:none] pt-2 pb-2 bg-yellowgreen self-stretch rounded-8xs flex flex-row items-center justify-center whitespace-nowrap hover:bg-forestgreen bg-green-500 rounded-lg"
-                          onClick={onGroupButtonClick}
-                        >
-                          <Link
-                            to={`/trainer/${trainer.name}/${trainer._id}/book-session`}
-                            className="flex-1 relative text-[1.875rem] font-medium font-rubik text-black text-center z-[1]"
+                        {user ? (
+                          ""
+                        ) : (
+                          <button
+                            className="cursor-pointer [border:none] pt-2 pb-2 bg-yellowgreen self-stretch rounded-8xs flex flex-row items-center justify-center whitespace-nowrap hover:bg-forestgreen rounded-lg"
+                            onClick={onGroupButtonClick}
                           >
-                            Book a session
-                          </Link>
-                        </button>
+                            <Link
+                              to={`/trainer/${trainer.name}/${trainer._id}/book-session`}
+                              className="flex-1 relative text-[1.875rem] font-medium font-rubik text-black text-center z-[1]"
+                            >
+                              Book a session
+                            </Link>
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -97,14 +102,19 @@ const LineSeparator = ({ trainer }) => {
             </div>
             <div className="h-[46rem] w-[0.063rem] relative object-contain" />
             <div className="w-[40.813rem] flex flex-col items-start justify-start pt-[2.625rem] px-[0rem] pb-[0rem] box-border max-w-full text-center text-[0.938rem] text-gray-200 font-rubik mq750:pt-[1.688rem] mq750:box-border">
+              {" "}
+              <section className=" w-full flex gap-4 justify-end mb-8">
+                <button className=" px-6 py-2 border rounded-lg">
+                  View Bookings
+                </button>
+                <button className=" px-6 py-2 border rounded-lg">
+                  Edit Profile
+                </button>
+              </section>
               <div className="self-stretch flex flex-col items-start justify-start gap-[2.5rem_0rem] max-w-full mq750:gap-[2.5rem_0rem]">
                 <div className="self-stretch flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.25rem] box-border max-w-full text-justify text-[1.125rem] text-white">
-                  <div className="h-[7.75rem] flex-1 relative leading-[1.875rem] font-light inline-block max-w-full">
-                    Welcome to my fitness journey! I'm David Rogan, a passionate
-                    and certified personal trainer dedicated to helping you
-                    achieve your fitness goals. With years of experience and a
-                    commitment to personalized training, I'm here to guide you
-                    towards a healthier and stronger version of yourself.
+                  <div className="flex-1 relative leading-[1.875rem] font-light inline-block max-w-full">
+                    {trainer.description}
                   </div>
                 </div>
                 <div className="w-[32.75rem] flex flex-row items-start justify-start pt-[0rem] px-[0rem] pb-[0.813rem] box-border gap-[0rem_0.625rem] max-w-full mq750:flex-wrap">
@@ -153,29 +163,38 @@ const LineSeparator = ({ trainer }) => {
                           C E R T I F I C A T I O N S
                         </div>
                       </div>
-                      <div className="w-[19.438rem] h-[6.188rem] flex flex-col items-start justify-start gap-[2.813rem_0rem] mq450:gap-[2.813rem_0rem]">
-                        <div className="self-stretch flex-1 flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.313rem] ml-[-0.3rem]">
-                          <div className="self-stretch flex-1 flex flex-row items-start justify-start gap-[0rem_0.875rem]">
-                            <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                              Personal Trainer
-                            </p>
-                            <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                              Health Coach
-                            </p>
+                      <div className=" w-full flex flex-col items-start justify-start gap-[2.813rem_0rem] mq450:gap-[2.813rem_0rem]">
+                        <div className="w-full flex-1 flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.313rem] ml-[-0.3rem]">
+                          <div className="w-full flex-1 flex flex-row items-start justify-start gap-[0rem_0.875rem]">
+                            {trainer &&
+                              trainer.certifications &&
+                              trainer.certifications.map(
+                                (certificate, index) => (
+                                  <p
+                                    key={index}
+                                    className="  border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md"
+                                  >
+                                    {certificate}
+                                  </p>
+                                )
+                              )}
                           </div>
                         </div>
                         <div className="relative">{`S P E C I A L I Z A T I O N `}</div>
                       </div>
                       <div className=" self-stretch flex flex-row items-start justify-start gap-[0rem_0.875rem] text-white mq450:flex-wrap">
-                        <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                          Weight Loss
-                        </p>
-                        <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                          Muscle Building
-                        </p>
-                        <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                          Functional
-                        </p>
+                        {trainer &&
+                          trainer.specializations &&
+                          trainer.specializations.map(
+                            (specialization, index) => (
+                              <p
+                                key={index}
+                                className="  border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md"
+                              >
+                                {specialization}
+                              </p>
+                            )
+                          )}
                       </div>
                     </div>
                     <div className="w-[13.563rem] h-[3.75rem] flex flex-row items-start justify-start py-[0rem] px-[0.125rem] box-border">

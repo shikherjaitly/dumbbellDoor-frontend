@@ -7,9 +7,10 @@ import dumbbelldoorLogo from "../../assets/dumbbelldoorLogo.png";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
-// import { FcGoogle } from "react-icons/fc";
+import { useUserContext } from "../../utils/UserContext";
 
 const Login = () => {
+  const { loginUser } = useUserContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,18 +20,16 @@ const Login = () => {
     try {
       const response = await axios.post(
         "https://dumbbelldoor-backned.onrender.com/api/auth/login",
-        { email, password },
-        // {authorization : document.cookies.accessToken}
-        // { withCredentials: true }
+        { email, password }
       );
-      
-      console.log(response);
+
       document.cookie = `email=${response.data.responseData.userEmail}; path=/`;
       document.cookie = `token=${response.data.responseData.accessToken}; path=/`;
+      document.cookie = `role=${response.data.responseData.userRole}; path=/`;
+      document.cookie = `id=${response.data.responseData.userId}; path=/`;
 
-      console.log(response.data.message);
       toast.success(response.data.message);
-
+      loginUser();
       window.location.href = "/";
     } catch (error) {
       console.log(error);

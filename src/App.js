@@ -12,11 +12,11 @@ import EditBooking from "./components/pages/EditBooking";
 import CustomerProfile from "./components/pages/CustomerProfile";
 import CustomerBookings from "./components/pages/CustomerBookings";
 import CustomerRegistration from "./components/pages/CustomerRegistration";
-import Context from "./utils/Context.js";
+import ContextProvider from "./utils/UserContext.js";
 
 export default function App() {
   return (
-    <Context>
+    <ContextProvider>
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -37,7 +37,10 @@ export default function App() {
             path="/trainer/:trainerName/:trainerID"
             element={<TrainerProfile />}
           />
-          <Route path="/customer" element={<CustomerProfile />} />
+          <Route
+            path="/customer/:customerName/:customerID"
+            element={<CustomerProfile />}
+          />
           <Route
             path="/trainer/:trainerName/:trainerID/book-session"
             element={<BookingPage />}
@@ -46,6 +49,6 @@ export default function App() {
           <Route path="/my-bookings" element={<CustomerBookings />} />
         </Routes>
       </div>
-    </Context>
+    </ContextProvider>
   );
 }
