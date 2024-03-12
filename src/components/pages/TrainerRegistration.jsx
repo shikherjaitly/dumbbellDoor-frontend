@@ -17,6 +17,8 @@ const steps = [
 const TrainerRegistration = () => {
   const [activeStep, setActiveStep] = useState(0);
 
+  const [availability, setAvailability] = useState([]);
+
   const [trainerInfo, setTrainerInfo] = useState({
     name: "",
     gender: "",
@@ -65,6 +67,21 @@ const TrainerRegistration = () => {
         [name]: value,
       }));
     }
+  };
+
+  const addAvailability = () => {
+    const x = {
+      day: trainerInfo.day,
+      startTime: trainerInfo.startTime,
+      endTime: trainerInfo.endTime,
+    };
+    setAvailability([...availability, x]);
+  };
+
+  const deleteSchedule = (index) => {
+    const newAvailability = [...availability];
+    newAvailability.splice(index, 1);
+    setAvailability(newAvailability);
   };
 
   const personalDetails = () => {
@@ -255,10 +272,41 @@ const TrainerRegistration = () => {
               </select>
             </div>
 
-            <button className=" bg-green-400 text-black px-3 font-bold rounded-md ">
+            <button
+              className=" bg-green-400 text-black px-3 font-bold rounded-md "
+              onClick={addAvailability}
+            >
               Add
             </button>
           </div>
+          {availability.length !== 0 && (
+            <div className=" w-full">
+              <table className=" w-full">
+                <tr>
+                  <th className=" text-left">Sl no.</th>{" "}
+                  <th className=" text-left">Day</th>{" "}
+                  <th className=" text-left">Start Time</th>{" "}
+                  <th className=" text-left">End Time</th>{" "}
+                </tr>
+                {availability.map((schedule, index) => (
+                  <tr key={index} className=" w-full">
+                    <td className=" text-left">{index + 1}</td>
+                    <td className=" text-left">{schedule.day}</td>
+                    <td className=" text-left">{schedule.startTime}</td>
+                    <td className=" text-left">{schedule.endTime}</td>
+                    <td
+                      className=" text-center cursor-pointer font-semibold text-gray-400 hover:text-white transition-all"
+                      onClick={() => {
+                        deleteSchedule(index);
+                      }}
+                    >
+                      Delete
+                    </td>
+                  </tr>
+                ))}
+              </table>
+            </div>
+          )}
         </div>
         <hr className=" w-full h-px bg-gray-500 border-0" />
         <input

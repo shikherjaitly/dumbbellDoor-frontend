@@ -117,130 +117,121 @@ const LineSeparator = ({ trainer, user }) => {
                     {trainer.description}
                   </div>
                 </div>
-                <div className="w-[32.75rem] flex flex-row items-start justify-start pt-[0rem] px-[0rem] pb-[0.813rem] box-border gap-[0rem_0.625rem] max-w-full mq750:flex-wrap">
-                  <div className="flex flex-col items-center justify-center pt-[0.25rem] px-[0rem] pb-[0rem]">
-                    <div className="flex flex-col items-center justify-center gap-[2.938rem_0rem]">
-                      <div className="flex flex-row items-center justify-center py-[0rem] pr-[0rem] pl-[0.25rem]">
-                        <img
-                          className="h-[3.75rem] w-[3.75rem] mr-4 relative object-cover"
-                          loading="lazy"
-                          alt=""
-                          src={badge}
-                        />
-                      </div>
-                      <div className="flex flex-col items-start justify-start gap-[3.188rem_0rem]">
-                        <img
-                          className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
-                          loading="lazy"
-                          alt=""
-                          src={specialization}
-                        />
-                        <img
-                          className="w-[3.75rem] h-[3.75rem] mr-4 relative"
-                          loading="lazy"
-                          alt=""
-                          src={services}
-                        />
-                        <img
-                          className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
-                          loading="lazy"
-                          alt=""
-                          src={calendar}
-                        />
-                        <img
-                          className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
-                          loading="lazy"
-                          alt=""
-                          src={location}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex-1 flex flex-col items-start justify-start gap-[3.313rem_0rem] min-w-[18.25rem] max-w-full mq450:gap-[3.313rem_0rem]">
-                    <div className="self-stretch flex flex-col items-start justify-start gap-[0.375rem_0rem]">
-                      <div className="flex flex-row items-start justify-start py-[0rem] px-[0.375rem] ml-[-0.3rem]">
-                        <div className="relative">
-                          C E R T I F I C A T I O N S
-                        </div>
-                      </div>
-                      <div className=" w-full flex flex-col items-start justify-start gap-[2.813rem_0rem] mq450:gap-[2.813rem_0rem]">
-                        <div className="w-full flex-1 flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.313rem] ml-[-0.3rem]">
-                          <div className="w-full flex-1 flex flex-row items-start justify-start gap-[0rem_0.875rem]">
-                            {trainer &&
-                              trainer.certifications &&
-                              trainer.certifications.map(
-                                (certificate, index) => (
-                                  <p
-                                    key={index}
-                                    className="  border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md"
-                                  >
-                                    {certificate}
-                                  </p>
-                                )
-                              )}
-                          </div>
-                        </div>
-                        <div className="relative">{`S P E C I A L I Z A T I O N `}</div>
-                      </div>
-                      <div className=" self-stretch flex flex-row items-start justify-start gap-[0rem_0.875rem] text-white mq450:flex-wrap">
-                        {trainer &&
-                          trainer.specializations &&
-                          trainer.specializations.map(
-                            (specialization, index) => (
+                <div className=" w-full flex flex-col gap-10 items-start justify-start pt-[0rem] px-[0rem] pb-[0.813rem] box-border max-w-full mq750:flex-wrap">
+                  <div className=" flex gap-4 justify-center items-center">
+                    <img
+                      className="h-[3.75rem] w-[3.75rem] mr-4 relative object-cover"
+                      loading="lazy"
+                      alt=""
+                      src={badge}
+                    />
+                    <div className=" flex flex-col gap-2 items-start">
+                      <p>C E R T I F I C A T I O N S</p>
+                      <div>
+                        <div className="w-full flex-1 flex flex-row items-start justify-start gap-[0rem_0.875rem]">
+                          {trainer &&
+                            trainer.certifications &&
+                            trainer.certifications.map((certificate, index) => (
                               <p
                                 key={index}
                                 className="  border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md"
                               >
-                                {specialization}
+                                {certificate}
                               </p>
-                            )
-                          )}
-                      </div>
-                    </div>
-                    <div className="w-[13.563rem] h-[3.75rem] flex flex-row items-start justify-start py-[0rem] px-[0.125rem] box-border">
-                      <div className="self-stretch flex-1 flex flex-col items-start justify-start gap-[0.375rem_0rem]">
-                        <div className="relative whitespace-pre-wrap">
-                          T Y P E S O F S E R V I C E S
-                        </div>
-                        <div className="self-stretch flex-1 flex flex-row items-start justify-start gap-[0rem_0.813rem]">
-                          <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                            In-Person
-                          </p>
-                          <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                            Online
-                          </p>
+                            ))}
                         </div>
                       </div>
                     </div>
-                    <div className="w-[21.875rem] flex flex-row items-start justify-start py-[0rem] px-[0.125rem] box-border max-w-full">
-                      <div className="flex-1 flex flex-col items-start justify-start gap-[0.375rem_0rem] max-w-full">
-                        <div className="relative">{`A V A I L A B I L I T Y `}</div>
-                        <div className="self-stretch flex flex-row items-start justify-center gap-[0rem_0.875rem] mq450:flex-wrap">
-                          <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                            Mon
-                          </p>
-                          <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                            Tue
-                          </p>
-                          <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                            Thur
-                          </p>
-                          <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                            Fri
-                          </p>
-                          <p className=" border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md">
-                            Sun
-                          </p>
+                  </div>
+                  <div className=" flex gap-4 justify-center items-center">
+                    <img
+                      className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
+                      loading="lazy"
+                      alt=""
+                      src={specialization}
+                    />
+                    <div className=" flex flex-col gap-2 items-start">
+                      <p>S P E C I A L I Z A T I O N</p>
+                      <div>
+                        <div className="w-full flex-1 flex flex-row items-start justify-start gap-[0rem_0.875rem]">
+                          {trainer &&
+                            trainer.specializations &&
+                            trainer.specializations.map(
+                              (specialization, index) => (
+                                <p
+                                  key={index}
+                                  className="  border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md"
+                                >
+                                  {specialization}
+                                </p>
+                              )
+                            )}
                         </div>
                       </div>
                     </div>
-                    <div className="w-[21.875rem] flex flex-row items-start justify-start py-[0rem] px-[0.125rem] box-border max-w-full">
-                      <div className="flex-1 flex flex-col items-start justify-start gap-[0.375rem_0rem] max-w-full">
-                        <div className="relative">{`L O C A T I O N `}</div>
-                        <div className="self-stretch flex flex-row items-start justify-center gap-[0rem_0.875rem] mq450:flex-wrap">
-                          <p className=" ml-[-0.8rem]">
-                            2nd main, 3rd stage, Electronic city, Bangalore - 25
-                          </p>
+                  </div>
+                  <div className=" flex gap-4 justify-center items-center">
+                    <img
+                      className="w-[3.75rem] h-[3.75rem] mr-4 relative"
+                      loading="lazy"
+                      alt=""
+                      src={services}
+                    />
+                    <div className=" flex flex-col gap-2 items-start">
+                      <p>S E R V I C E S</p>
+                      <div>
+                        <div className="w-full flex-1 flex flex-row items-start justify-start gap-[0rem_0.875rem]">
+                          {trainer &&
+                            trainer.typesOfServices &&
+                            trainer.typesOfServices.map((service, index) => (
+                              <p
+                                key={index}
+                                className="  border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md"
+                              >
+                                {service}
+                              </p>
+                            ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className=" flex gap-4 justify-center items-center">
+                    <img
+                      className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
+                      loading="lazy"
+                      alt=""
+                      src={calendar}
+                    />
+                    <div className=" flex flex-col gap-2 items-start">
+                      <p>A V A I L A B I L I T Y </p>
+                      <div>
+                        <div className="w-full flex-1 flex flex-row items-start justify-start gap-[0rem_0.875rem]">
+                          {trainer &&
+                            trainer.typesOfServices &&
+                            trainer.typesOfServices.map((service, index) => (
+                              <p
+                                key={index}
+                                className="  border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md"
+                              >
+                                {service}
+                              </p>
+                            ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className=" flex gap-4 justify-center items-center">
+                    <img
+                      className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
+                      loading="lazy"
+                      alt=""
+                      src={location}
+                    />
+                    <div className=" flex flex-col gap-2 items-start">
+                      <p>L O C A T I O N</p>
+                      <div>
+                        <div className="w-full flex-1 flex flex-row items-start justify-start gap-[0rem_0.875rem]">
+                          {trainer.location}
                         </div>
                       </div>
                     </div>
