@@ -16,6 +16,7 @@ const TrainerProfile = () => {
   useEffect(() => {
     // Call the loginUser function when the component mounts
     loginUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this effect runs only once
 
   useEffect(() => {
@@ -30,6 +31,7 @@ const TrainerProfile = () => {
       }
     };
     fetchTrainerDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
