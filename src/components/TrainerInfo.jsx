@@ -72,7 +72,7 @@ const LineSeparator = ({ trainer, user }) => {
                             {trainer.phoneNumber}
                           </div>
                         </div>
-                        {user ? (
+                        {user && user.role === "Trainer" ? (
                           ""
                         ) : (
                           <button
