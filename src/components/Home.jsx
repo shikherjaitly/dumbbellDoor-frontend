@@ -11,7 +11,8 @@ const Home = () => {
   useEffect(() => {
     // Call the loginUser function when the component mounts
     loginUser();
-  }, [loginUser]); // Empty dependency array ensures this effect runs only once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array ensures this effect runs only once
 
   return (
     <div className=" w-full overflow-hidden">

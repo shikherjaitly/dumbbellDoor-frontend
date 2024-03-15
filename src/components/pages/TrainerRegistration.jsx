@@ -6,6 +6,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 
 const steps = [
   "Personal Details",
@@ -17,30 +18,62 @@ const steps = [
 const TrainerRegistration = () => {
   const [activeStep, setActiveStep] = useState(0);
 
+  const [availability, setAvailability] = useState([]);
+
   const [trainerInfo, setTrainerInfo] = useState({
     name: "",
     gender: "",
-    profileiPicture: "",
+    profilePicture: "",
     description: "",
-    yearsOfExperiemce: "",
+    yearsOfExperience: "",
     certifications: "",
-    specialization: "",
-    modeOfTraining: "",
+    specializations: "",
+    typesOfServices: "",
     day: "",
     startTime: "",
     endTime: "",
-    city: "",
+    location: "",
     phoneNumber: "",
     instagramID: "",
     facebookID: "",
   });
 
-  const handleNext = () => {
+  const handleNext = (e) => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep === steps.length - 1) {
+      handleFinish(e);
+    }
   };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleFinish = async () => {
+    const formData = new FormData();
+
+    // Append each field to FormData
+    Object.keys(trainerInfo).forEach((key) => {
+      formData.append(key, trainerInfo[key]);
+    });
+
+    // Append availability as a JSON string
+    formData.append("availability", JSON.stringify(availability));
+    console.log(formData);
+    try {
+      const response = await axios.patch(
+        "https://dumbbelldoor-backned.onrender.com/api/trainer/build-your-profile",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChange = (e) => {
@@ -48,7 +81,7 @@ const TrainerRegistration = () => {
 
     if (name === "inPerson" || name === "online") {
       setTrainerInfo((prevState) => {
-        let updatedModes = [...prevState.modeOfTraining];
+        let updatedModes = [...prevState.typesOfServices];
         if (checked) {
           updatedModes.push(value);
         } else {
@@ -56,7 +89,7 @@ const TrainerRegistration = () => {
         }
         return {
           ...prevState,
-          modeOfTraining: updatedModes,
+          typesOfServices: updatedModes,
         };
       });
     } else {
@@ -65,6 +98,21 @@ const TrainerRegistration = () => {
         [name]: value,
       }));
     }
+  };
+
+  const addAvailability = () => {
+    const x = {
+      day: trainerInfo.day,
+      startTime: trainerInfo.startTime,
+      endTime: trainerInfo.endTime,
+    };
+    setAvailability([...availability, x]);
+  };
+
+  const deleteSchedule = (index) => {
+    const newAvailability = [...availability];
+    newAvailability.splice(index, 1);
+    setAvailability(newAvailability);
   };
 
   const personalDetails = () => {
@@ -101,7 +149,7 @@ const TrainerRegistration = () => {
           placeholder="Profile Picture"
           name="profilePicture"
           onChange={handleChange}
-          value={trainerInfo.profileiPicture}
+          value={trainerInfo.profilePicture}
         />
         <textarea
           className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none resize-none"
@@ -121,9 +169,9 @@ const TrainerRegistration = () => {
           type="text"
           className=" w-full p-4 bg-transparent border border-gray-500 rounded-md  outline-none"
           placeholder="Years of Experience"
-          name="yearsOfExperiemce"
+          name="yearsOfExperience"
           onChange={handleChange}
-          value={trainerInfo.yearsOfExperiemce}
+          value={trainerInfo.yearsOfExperience}
         />
         <input
           type="text"
@@ -136,10 +184,10 @@ const TrainerRegistration = () => {
         <input
           type="text"
           className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
-          placeholder="Specialization"
-          name="specialization"
+          placeholder="Specializations"
+          name="specializations"
           onChange={handleChange}
-          value={trainerInfo.specialization}
+          value={trainerInfo.specializations}
         />
       </div>
     );
@@ -255,19 +303,50 @@ const TrainerRegistration = () => {
               </select>
             </div>
 
-            <button className=" bg-green-400 text-black px-3 font-bold rounded-md ">
+            <button
+              className=" bg-green-400 text-black px-3 font-bold rounded-md "
+              onClick={addAvailability}
+            >
               Add
             </button>
           </div>
+          {availability.length !== 0 && (
+            <div className=" w-full">
+              <table className=" w-full">
+                <tr>
+                  <th className=" text-left">Sl no.</th>{" "}
+                  <th className=" text-left">Day</th>{" "}
+                  <th className=" text-left">Start Time</th>{" "}
+                  <th className=" text-left">End Time</th>{" "}
+                </tr>
+                {availability.map((schedule, index) => (
+                  <tr key={index} className=" w-full">
+                    <td className=" text-left">{index + 1}</td>
+                    <td className=" text-left">{schedule.day}</td>
+                    <td className=" text-left">{schedule.startTime}</td>
+                    <td className=" text-left">{schedule.endTime}</td>
+                    <td
+                      className=" text-center cursor-pointer font-semibold text-gray-400 hover:text-white transition-all"
+                      onClick={() => {
+                        deleteSchedule(index);
+                      }}
+                    >
+                      Delete
+                    </td>
+                  </tr>
+                ))}
+              </table>
+            </div>
+          )}
         </div>
         <hr className=" w-full h-px bg-gray-500 border-0" />
         <input
           type="text"
           className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
-          placeholder="City"
-          name="city"
+          placeholder="Location"
+          name="location"
           onChange={handleChange}
-          value={trainerInfo.city}
+          value={trainerInfo.location}
         />
       </div>
     );
@@ -348,7 +427,7 @@ const TrainerRegistration = () => {
                   Back
                 </Button>
                 <Box sx={{ flex: "1 1 auto" }} />
-                <Button onClick={handleNext}>
+                <Button onClick={(e) => handleNext(e)}>
                   {activeStep === steps.length - 1 ? "Finish" : "Next"}
                 </Button>
               </Box>
