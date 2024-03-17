@@ -27,7 +27,8 @@ const Login = () => {
       document.cookie = `token=${response.data.responseData.accessToken}; path=/`;
       document.cookie = `role=${response.data.responseData.userRole}; path=/`;
       document.cookie = `id=${response.data.responseData.userId}; path=/`;
-
+      document.cookie = `profileStatus=${response.data.responseData.userProfileStatus}; path=/`;
+      
       toast.success(response.data.message);
       loginUser();
       window.location.href = "/";
