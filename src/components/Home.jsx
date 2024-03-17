@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useUserContext } from "../utils/UserContext";
 
 const Home = () => {
-  const { loginUser } = useUserContext();
+  const { loginUser, user } = useUserContext();
 
   useEffect(() => {
     // Call the loginUser function when the component mounts
@@ -37,18 +37,14 @@ const Home = () => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 flex justify-center mb-8">
           <div className="pt-6 flex">
-            <Link
-              to="/signup"
-              className="flex items-center justify-center px-28 mb-3 py-4 text-xl text-center font-lato leading-none bg-lime-300 hover:bg-green-400 transition-all rounded-full mr-4"
-            >
-              Sign Up
-            </Link>
-            <Link
-              to="/login"
-              className="flex items-center justify-center px-28 mb-3 py-4 text-xl text-center text-black font-lato bg-sky-400 hover:bg-sky-500 transition-all rounded-full"
-            >
-              Login
-            </Link>
+            {!user && ( // Render login button only if user details are not present
+              <Link
+                to="/login"
+                className="flex items-center justify-center px-28 mb-3 py-4 text-xl text-center text-black font-lato bg-sky-400 hover:bg-sky-500 transition-all rounded-full"
+              >
+                Login
+              </Link>
+            )}
           </div>
         </div>
       </div>
