@@ -73,8 +73,8 @@ const CustomerProfile = () => {
                 </div>
                 <hr className=" w-full h-px bg-gray-500 border-0" />
                 <div className=" flex justify-between text-lg ">
-                  <p>Birthday</p>
-                  <p>24/03/2024</p>
+                  <p>Age</p>
+                  <p>22</p>
                 </div>
                 <hr className=" w-full h-px bg-gray-500 border-0" />
                 <div className=" flex justify-between text-lg ">
