@@ -6,9 +6,9 @@ const CustomerRegistration = () => {
     const [customerInfo, setCustomerInfo] = useState({
         name: "",
         gender: "",
-        profileiPicture: "",
-        location: "",
-        preferredLanguage: "",
+        profilePicture: "",
+        location: null,
+        preferredLanguage: null,
         age: "",
         weight: "",
         height: "",
@@ -20,6 +20,22 @@ const CustomerRegistration = () => {
             ...prevState,
             [name]: value,
         }));
+    };
+
+    // List of metro city locations in India
+    const metroCities = ["Bangalore", "Mumbai", "Hyderabad", "Pune", "Delhi"];
+
+     //     Lnaguages
+    const preferredlanguages = ["English", "Marathi", "Hindi", "Kannada"];
+
+
+    // Handler for file change
+    const handleFileChange = (e) => {
+        const file = e.target.files[0]; // Get the selected file
+        setCustomerInfo({
+        ...customerInfo,
+        profilePicture: file // Update the profilePicture in state
+        });
     };
 
     return (
@@ -57,30 +73,37 @@ const CustomerRegistration = () => {
                 </option>
                 </select>
                 <input
-                type="file"
-                className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
-                placeholder="Profile Picture"
-                name="profilePicture"
-                onChange={handleChange}
-                value={customerInfo.profileiPicture}
+                    type="file"
+                    className="w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none"
+                    name="profilePicture"
+                    onChange={handleFileChange}
                 />
-                <input
-                    type="text"
+                <select 
                     className="w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
                     autoComplete="off"
                     placeholder="Location"
                     name="location"
                     onChange={handleChange}
-                    value={customerInfo.location}
-                />
-                <input
+                    value={customerInfo.location} >
+                      {metroCities.map((city, index) => (
+                        <option key={index} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                </select>
+                <select 
                     type="text"
                     className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
                     placeholder="Language"
                     name="preferredLanguage"
                     onChange={handleChange}
-                    value={customerInfo.preferredLanguage}
-                />
+                    value={customerInfo.preferredLanguage} >
+                      {preferredlanguages.map((lang, index) => (
+                        <option key={index} value={lang}>
+                          {lang}
+                        </option>
+                      ))}
+                </select>
                 <input
                     type="number"
                     className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "

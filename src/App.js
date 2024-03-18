@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import FindTrainers from "./components/pages/FindTrainers";
 import TrainerProfile from "./components/TrainerProfile";
 import TrainerRegistration from "./components/pages/TrainerRegistration";
+import TrainerBookings from "./components/pages/TrainerBooking.jsx";
 import ForgotPassword from "./components/auth/ForgotPassword";
 import ResetPassword from "./components/auth/ResetPassword";
 import BookingPage from "./components/pages/BookingPage";
@@ -29,7 +30,7 @@ export default function App() {
             path="/trainer/build-your-profile"
             element={<TrainerRegistration />}
           />
-          <Route
+          <Route 
             path="/customer/your-details"
             element={<CustomerRegistration />}
           />
@@ -44,6 +45,7 @@ export default function App() {
           />
           <Route path="/edit-booking" element={<EditBooking />} />
           <Route path="/my-bookings" element={<CustomerBookings />} />
+          <Route path="/trainer/my-bookings" element={<TrainerBookings />} />
         </Routes>
       </div>
     </Context>
