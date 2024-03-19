@@ -9,16 +9,13 @@ const Navbar = () => {
   // const { user } = useUserContext();
   
   const { user, loginUser } = useUserContext();
-<<<<<<< Updated upstream
   const [cookies] = useCookies(['role']);
 
   // Access the value of the cookie
   // const cookieValue = cookies.cookieName;
 
   console.log(loginUser);
-=======
   
->>>>>>> Stashed changes
   useEffect(() => {
     // Call the loginUser function when the component mounts
     loginUser();
