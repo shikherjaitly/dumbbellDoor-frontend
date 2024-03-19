@@ -102,14 +102,16 @@ const LineSeparator = ({ trainer, user }) => {
             <div className="h-[46rem] w-[0.063rem] relative object-contain" />
             <div className="w-[40.813rem] flex flex-col items-start justify-start pt-[2.625rem] px-[0rem] pb-[0rem] box-border max-w-full text-center text-[0.938rem] text-gray-200 font-rubik mq750:pt-[1.688rem] mq750:box-border">
               {" "}
-              <section className=" w-full flex gap-4 justify-end mb-8">
+              {user && user.role === "Trainer" ? (
+                <section className=" w-full flex gap-4 justify-end mb-8">
                 <button className=" px-6 py-2 border rounded-lg">
                   View Bookings
                 </button>
                 <button className=" px-6 py-2 border rounded-lg">
                   Edit Profile
                 </button>
-              </section>
+              </section>  ) : ( "" 
+              )}
               <div className="self-stretch flex flex-col items-start justify-start gap-[2.5rem_0rem] max-w-full mq750:gap-[2.5rem_0rem]">
                 <div className="self-stretch flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.25rem] box-border max-w-full text-justify text-[1.125rem] text-white">
                   <div className="flex-1 relative leading-[1.875rem] font-light inline-block max-w-full">
