@@ -1,31 +1,22 @@
-import React, { useEffect, useState } from "react";
-import Navbar from "../Navbar";
+import React, { useState } from "react";
 import axios from "axios";
-import { useUserContext } from "../../utils/UserContext";
-import { useNavigate } from "react-router-dom";
+// import { useUserContext } from "../../utils/UserContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
-const CustomerRegistration = () => {
-  const navigate = useNavigate();
-  const { user, loginUser } = useUserContext();
-
-  useEffect(() => {
-    // Call the loginUser function when the component mounts
-    loginUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Empty dependency array ensures this effect runs only once
+const EditCustomerProfile = ({ user, setOpen }) => {
   const [customerInfo, setCustomerInfo] = useState({
-    name: "",
-    gender: "",
-    profilePicture: "",
-    location: "",
-    language: "",
-    age: "",
-    weight: "",
-    height: "",
-    phoneNumber: "",
+    name: user.name,
+    gender: user.gender,
+    profilePicture: user.profilePicture,
+    location: user.location,
+    language: user.language,
+    age: user.age,
+    weight: user.weight,
+    height: user.height,
+    phoneNumber: user.phoneNumber,
   });
 
   const handleChange = (e) => {
@@ -55,15 +46,6 @@ const CustomerRegistration = () => {
     "Kannada",
   ];
 
-  // Handler for file change
-  //   const handleFileChange = (e) => {
-  //     const file = e.target.files[0]; // Get the selected file
-  //     setCustomerInfo({
-  //       ...customerInfo,
-  //       profilePicture: file, // Update the profilePicture in state
-  //     });
-  //   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -79,7 +61,7 @@ const CustomerRegistration = () => {
     formData.append("height", customerInfo.height);
     try {
       const response = await axios.patch(
-        "http://localhost:8000/api/customer/build-your-profile",
+        "http://localhost:8000/api/customer/update-your-profile",
         formData,
         {
           headers: {
@@ -88,19 +70,25 @@ const CustomerRegistration = () => {
         }
       );
       toast.success(response.data.message);
-      navigate(`/customer/${user.name}/${user.id}`);
+      setOpen(false);
+      window.location.reload(false);
     } catch (error) {
-      toast.error(error.response.data.message);
+      console.log(error);
+      // toast.error(error.response.data.message);
     }
   };
 
   return (
-    <div className="w-full min-h-[100vh] relative [background:linear-gradient(108.87deg,_#00101c,_#00101c,_#29000f)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] overflow-hidden flex flex-col items-center justify-start pt-[3.813rem] pb-[3.875rem] pr-[3.438rem] pl-[1.25rem] box-border gap-[2.688rem_0rem] tracking-[normal] mq750:gap-[2.688rem_0rem] mq1275:pr-[1.688rem] mq1275:box-border text-white">
-      <div style={{ marginTop: "-3.5rem" }}>
-        <Navbar />
-      </div>
-      <h1 className=" font-semibold text-[36px]">Your Details</h1>
-      <div className=" w-[50%] border border-gray-500 px-10 py-10 rounded-xl">
+    <div className="w-[40%] h-[80vh] m-auto mt-20 relative [background:linear-gradient(108.87deg,_#00101c,_#00101c,_#29000f)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] overflow-auto flex flex-col items-center justify-start p-8 box-border gap-[2.688rem_0rem] tracking-[normal] mq750:gap-[2.688rem_0rem] mq1275:pr-[1.688rem] mq1275:box-border text-white rounded-xl">
+      <section className=" w-full flex justify-between items-end">
+        <h1 className=" font-semibold text-[36px]">Update Profile</h1>
+        <IoIosCloseCircleOutline
+          className=" text-4xl cursor-pointer"
+          onClick={() => setOpen(false)}
+        />
+      </section>
+
+      <div className=" w-[100%] border border-gray-500 p-10 rounded-xl">
         <form
           onSubmit={handleSubmit}
           className="m-auto flex flex-col justify-center items-center gap-4"
@@ -199,14 +187,13 @@ const CustomerRegistration = () => {
             onChange={handleChange}
             value={customerInfo.height}
           />
-          {/* <div className=" -mb-7 ml-auto"> */}
+
           <button
             type="submit"
             className=" flex justify-end items-end text-lg font-semibold text-purple-500 mb-[-1.5rem] text-right"
           >
-            Submit
+            Update
           </button>
-          {/* </div> */}
         </form>
       </div>
       <ToastContainer />
@@ -214,4 +201,4 @@ const CustomerRegistration = () => {
   );
 };
 
-export default CustomerRegistration;
+export default EditCustomerProfile;

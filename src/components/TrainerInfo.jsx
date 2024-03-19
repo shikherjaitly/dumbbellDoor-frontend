@@ -17,7 +17,6 @@ import { FaSquareInstagram } from "react-icons/fa6";
 import { FaSquareWhatsapp } from "react-icons/fa6";
 
 const LineSeparator = ({ trainer, user }) => {
-  console.log(user);
   const onGroupButtonClick = useCallback(() => {
     // Please sync "Booking Page" to the project
   }, []);

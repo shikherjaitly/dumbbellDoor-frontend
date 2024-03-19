@@ -8,7 +8,7 @@ import tickmark from "../../assets/tickmark.png";
 import Navbar from "../Navbar";
 
 const EditBooking = () => {
-  const { trainerID } = useParams();
+  const { trainerId } = useParams();
   const [trainer, setTrainer] = useState({});
 
   const [bookingInfo, setBookingInfo] = useState({
@@ -27,7 +27,7 @@ const EditBooking = () => {
     const fetchTrainerDetails = async () => {
       try {
         const trainerData = await axios.get(
-          `https://dumbbelldoor-backned.onrender.com/api/trainer/fetchTrainerDetails/${trainerID}`
+          `https://dumbbelldoor-backned.onrender.com/api/trainer/fetchTrainerDetails/${trainerId}`
         );
         setTrainer(trainerData.data.message);
       } catch (error) {
@@ -35,7 +35,7 @@ const EditBooking = () => {
       }
     };
     fetchTrainerDetails();
-  }, [trainerID]);
+  }, [trainerId]);
 
   //   const bookSession = () => {
   //     if (
