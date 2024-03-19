@@ -30,7 +30,7 @@ export default function App() {
             path="/trainer/build-your-profile"
             element={<TrainerRegistration />}
           />
-          <Route 
+          <Route
             path="/customer/your-details"
             element={<CustomerRegistration />}
           />
@@ -46,8 +46,14 @@ export default function App() {
             path="/trainer/:trainerName/:trainerID/book-session"
             element={<BookingPage />}
           />
-          <Route path="/edit-booking" element={<EditBooking />} />
-          <Route path="/my-bookings" element={<CustomerBookings />} />
+          <Route
+            path="/customer/:customerName/editBooking/:bookingId/:trainerId"
+            element={<EditBooking />}
+          />
+          <Route
+            path="/customer/:customerName/:customerID/my-bookings"
+            element={<CustomerBookings />}
+          />
           <Route path="/trainer/my-bookings" element={<TrainerBookings />} />
         </Routes>
       </div>

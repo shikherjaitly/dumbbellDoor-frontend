@@ -43,7 +43,10 @@ const ContextProvider = ({ children }) => {
     // const userData = { userEmail, userRole, userId, userAccessToken };
     // fetchUserDetails(userId, userRole);
     // return userData;
-    const userDetails = await fetchUserDetails(userId, userRole);
+    const userDetails =
+      userId !== "" &&
+      userRole !== "" &&
+      (await fetchUserDetails(userId, userRole));
     setUser(userDetails);
   };
 
@@ -62,11 +65,25 @@ const ContextProvider = ({ children }) => {
     }
   };
 
+  const getBookings = async (email) => {
+    try {
+      const endpoint = `http://localhost:8000/api/bookings/${email}`;
+
+      const response = await axios.get(endpoint);
+
+      return response.data.message;
+    } catch (error) {
+      console.error("Error fetching booking details:", error);
+      throw new Error("Failed to fetch user details");
+    }
+  };
+
   const value = {
     user,
     trainers,
     loginUser,
     // fetchUserDetails,
+    getBookings,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
