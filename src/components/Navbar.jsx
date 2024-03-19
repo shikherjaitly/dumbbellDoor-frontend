@@ -2,12 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import dumbbelldoorLogo from "../assets/dumbbelldoorLogo.png";
 import { useUserContext } from "../utils/UserContext";
+import { useCookies } from 'react-cookie';
 // import { useUserContext } from "../utils/UserContext";
 
 const Navbar = () => {
   // const { user } = useUserContext();
   const { user, loginUser } = useUserContext();
+  const [cookies] = useCookies(['role']);
 
+  // Access the value of the cookie
+  // const cookieValue = cookies.cookieName;
+
+  console.log(loginUser);
   useEffect(() => {
     // Call the loginUser function when the component mounts
     loginUser();
@@ -71,14 +77,19 @@ const Navbar = () => {
             <Link
               className="text-lg text-gray-400 hover:text-gray-500 transition-all"
               to={`${
-                user
-                  ? user.role === "Trainer"
-                    ? `/trainer/${user.name}/${user._id}`
-                    : `/customer/${user.name}/${user._id}`
+                cookies
+                  ? cookies.role === "Trainer"
+                    ? `/trainer/${cookies.id}`
+                    : `/customer/${cookies.id}`
                   : "/login"
               }`}
             >
-              {user ? "My Profile" : "Login/Signup"}
+              {cookies ? "My Profile" : "Login/Signup"}
+            </Link>
+          </li>
+          <li>
+            <Link className="text-lg text-gray-400 hover:text-gray-500 transition-all">
+              logout
             </Link>
           </li>
         </ul>
