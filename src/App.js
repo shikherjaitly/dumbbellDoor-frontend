@@ -35,11 +35,11 @@ export default function App() {
             element={<CustomerRegistration />}
           />
           <Route
-            path="/trainer/:trainerName/:trainerID"
+            path="/trainer/:trainerID"
             element={<TrainerProfile />}
           />
           <Route
-            path="/customer/:customerName/:customerID"
+            path="/customer/:customerID"
             element={<CustomerProfile />}
           />
           <Route
@@ -47,7 +47,7 @@ export default function App() {
             element={<BookingPage />}
           />
           <Route
-            path="/customer/:customerName/editBooking/:bookingId/:trainerId"
+            path="/customer/editBooking/:bookingId/:trainerId"
             element={<EditBooking />}
           />
           <Route
