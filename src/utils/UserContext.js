@@ -65,9 +65,22 @@ const ContextProvider = ({ children }) => {
     }
   };
 
-  const getBookings = async (email) => {
+  const getCustomerBookings = async (email) => {
     try {
-      const endpoint = `http://localhost:8000/api/bookings/${email}`;
+      const endpoint = `http://localhost:8000/api/bookings/customer/${email}`;
+
+      const response = await axios.get(endpoint);
+
+      return response.data.message;
+    } catch (error) {
+      console.error("Error fetching booking details:", error);
+      throw new Error("Failed to fetch user details");
+    }
+  };
+
+  const getTrainerBookings = async (email) => {
+    try {
+      const endpoint = `http://localhost:8000/api/bookings/trainer/${email}`;
 
       const response = await axios.get(endpoint);
 
@@ -83,7 +96,8 @@ const ContextProvider = ({ children }) => {
     trainers,
     loginUser,
     // fetchUserDetails,
-    getBookings,
+    getCustomerBookings,
+    getTrainerBookings,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
