@@ -8,23 +8,24 @@ import { useEffect, useState } from "react";
 
 
 const TrainerBookings = () => {
-  const { loginUser, user, getCustomerBookings } = useUserContext();
+  const { loginUser, user, getTrainerBookings } = useUserContext();
 
-  const [bookings, setBookings] = useState([]);
+  const [bookings] = useState([]);
   const [filteredBookings, setFilteredBookings] = useState([]);
   const [cookies] = useCookies(['id']); // Initialize cookies
 
   useEffect(() => {
     // Call the loginUser function when the component mounts
-    loginUser();
+    user && loginUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this effect runs only once
 
   useEffect(() => {
     const fetchBookings = async () => {
-      const myBookings = user && (await getCustomerBookings(user.email));
-      setBookings(myBookings);
-      setFilteredBookings(myBookings);
+      const myBookings = user && (await getTrainerBookings(user.email));
+      // setBookings(myBookings);
+      // setFilteredBookings(myBookings);
+      console.log(myBookings);
     };
     fetchBookings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
