@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { toast } from "react-toastify";
@@ -18,9 +18,22 @@ const BookingPage = () => {
   const { loginUser, user } = useUserContext();
 
   useEffect(() => {
-    loginUser();
+    user && loginUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this effect runs only once
+
+  const navigate = useNavigate();
+
+  const cookies = document.cookie;
+
+  // Parse cookies into an object
+  const cookieObj = cookies.split(";").reduce((acc, cookie) => {
+    const [name, value] = cookie.trim().split("=");
+    acc[name] = value;
+    return acc;
+  }, {});
+
+  const userId = cookieObj["id"];
 
   const { trainerID } = useParams();
   const [trainer, setTrainer] = useState({});
@@ -79,6 +92,7 @@ const BookingPage = () => {
           }
         );
         toast.success(response.data.message);
+        navigate(`/customer/${userId}/my-bookings`);
       } catch (error) {
         toast.error(error.response.data.message);
       }

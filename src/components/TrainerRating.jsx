@@ -15,7 +15,7 @@ const TrainerRating = () => {
 
   const [cookies] = useCookies(["id"]);
   const userID = cookies.id;
-  console.log(userID);
+
   const [rating, setRating] = useState(0); // State to store the rating value
   const [comment, setComment] = useState(""); // State to store the comment value
   const maxChars = 1000; // Maximum character limit for the comment
