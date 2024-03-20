@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 // import signup from "../../assets/signup_page.png";
 // import { FcGoogle } from "react-icons/fc";
 import dumbbelldoorLogo from "../../assets/dumbbelldoorLogo.png";
@@ -12,10 +11,39 @@ import "react-toastify/dist/ReactToastify.css";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState("");
+
+  
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+    if (!passwordRegex.test(password)) {
+      let errorMessage = "Password must ";
+      if (password.length < 8) {
+        errorMessage += "be at least 8 characters long";
+      } else {
+        errorMessage +=
+          "contain at least one uppercase letter, one lowercase letter, one digit, and one special character";
+      }
+      return errorMessage;
+    }
+    return true;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    const passwordValidationResult = validatePassword(password);
+    if (passwordValidationResult !== true) {
+      toast.error(passwordValidationResult);
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -33,6 +61,11 @@ const Signup = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -141,6 +174,25 @@ const Signup = () => {
                   required
                   onChange={handlePasswordChange}
                   placeholder="Your Password"
+                  className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                />
+              </div>
+              <div className="mb-4">
+                <div className="flex justify-between mb-2">
+                  <label
+                    for="confirmPassword"
+                    className="text-sm text-gray-600 dark:text-gray-400"
+                  >
+                    Confirm Password
+                  </label>
+                </div>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  required
+                  onChange={handleConfirmPasswordChange}
+                  placeholder="Confirm Password"
                   className="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
                 />
               </div>
