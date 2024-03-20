@@ -79,7 +79,7 @@ const CustomerRegistration = () => {
     formData.append("height", customerInfo.height);
     try {
       const response = await axios.patch(
-        "http://localhost:8000/api/customer/build-your-profile",
+        "https://dumbbelldoor-backned.onrender.com/api/customer/build-your-profile",
         formData,
         {
           headers: {

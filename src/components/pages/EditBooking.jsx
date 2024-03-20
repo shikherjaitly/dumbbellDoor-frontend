@@ -60,7 +60,7 @@ const EditBooking = () => {
     } else {
       try {
         const response = await axios.patch(
-          `http://localhost:8000/api/bookings/update-booking-details/${bookingId}`,
+          `https://dumbbelldoor-backned.onrender.com/api/bookings/update-booking-details/${bookingId}`,
           {
             date: bookingInfo.date,
             customerId: user.id,

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import Rating from '@mui/material/Rating';
-import StarIcon from '@mui/icons-material/Star';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
+import Rating from "@mui/material/Rating";
+import StarIcon from "@mui/icons-material/Star";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 // import { useUserContext } from "../utils/UserContext.js";
 
 const TrainerRating = () => {
@@ -13,7 +13,7 @@ const TrainerRating = () => {
   // const { user } = useUserContext();
   // Access user data from context
 
-  const [cookies] = useCookies(['id']);
+  const [cookies] = useCookies(["id"]);
   const userID = cookies.id;
   console.log(userID);
   const [rating, setRating] = useState(0); // State to store the rating value
@@ -40,7 +40,7 @@ const TrainerRating = () => {
 
       // Send rating data to backend along with user ID and trainer ID
       const response = await axios.post(
-        `http://localhost:5005/api/testimonials/${trainerID}`,
+        `https://dumbbelldoor-backned.onrender.com/api/testimonials/${trainerID}`,
         { rating, comment, userID }, // Include user ID in the request body
         { withCredentials: true } // Send cookies with the request
       );
@@ -61,13 +61,15 @@ const TrainerRating = () => {
       <h1 className=" text-4xl">Rate Your Trainer</h1>
       <div className="flex flex-col items-center gap-4">
         {/* Rating component */}
-        <Rating 
-          name="size-large" 
-          size="large"  
+        <Rating
+          name="size-large"
+          size="large"
           value={rating}
-          onChange={handleRatingChange}  
-          emptyIcon={<StarBorderIcon fontSize="large" style={{ color: 'white' }} />}
-          icon={<StarIcon fontSize="large" />} 
+          onChange={handleRatingChange}
+          emptyIcon={
+            <StarBorderIcon fontSize="large" style={{ color: "white" }} />
+          }
+          icon={<StarIcon fontSize="large" />}
         />
         <textarea
           cols={cols}
@@ -77,9 +79,10 @@ const TrainerRating = () => {
           value={comment}
           onChange={handleCommentChange}
         ></textarea>
-        <button 
+        <button
           className=" bg-purple-500 hover:bg-purple-700 text-lg text-black rounded-md font-semibold pt-1 pb-1 pr-8 pl-8"
-          onClick={submitFeedback}>
+          onClick={submitFeedback}
+        >
           Submit
         </button>
       </div>
