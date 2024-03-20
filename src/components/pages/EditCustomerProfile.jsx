@@ -61,7 +61,7 @@ const EditCustomerProfile = ({ user, setOpen }) => {
     formData.append("height", customerInfo.height);
     try {
       const response = await axios.patch(
-        "http://localhost:8000/api/customer/update-your-profile",
+        "https://dumbbelldoor-backned.onrender.com/customer/update-your-profile",
         formData,
         {
           headers: {

@@ -12,8 +12,16 @@ import rupee from "../../assets/rupee.png";
 import clock from "../../assets/clock.png";
 import total from "../../assets/total.png";
 import Navbar from "../Navbar";
+import { useUserContext } from "../../utils/UserContext";
 
 const BookingPage = () => {
+  const { loginUser, user } = useUserContext();
+
+  useEffect(() => {
+    loginUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array ensures this effect runs only once
+
   const { trainerID } = useParams();
   const [trainer, setTrainer] = useState({});
 
@@ -43,7 +51,7 @@ const BookingPage = () => {
     fetchTrainerDetails();
   }, [trainerID]);
 
-  const bookSession = () => {
+  const bookSession = async () => {
     if (
       bookingInfo.modeOfTraining === "" ||
       bookingInfo.workoutType === "" ||
@@ -51,9 +59,29 @@ const BookingPage = () => {
       bookingInfo.startTime === "" ||
       bookingInfo.endTime === ""
     ) {
-      toast.error("Please fill the booking details correctly!");
+      toast.error("Please fill all the booking details correctly!");
     } else {
-      toast.success("Booking request sent for approval!");
+      try {
+        const response = await axios.post(
+          "https://dumbbelldoor-backned.onrender.com/api/bookings/send-booking-details",
+          {
+            date: bookingInfo.date,
+            customerId: user.id,
+            customerEmail: user.email,
+            customerName: user.name,
+            trainerName: trainer.name,
+            trainerId: trainer._id,
+            workoutType: bookingInfo.workoutType,
+            modeOfTraining: bookingInfo.modeOfTraining,
+            startTime: bookingInfo.startTime,
+            endTime: bookingInfo.endTime,
+            amount: (bookingInfo.endTime - bookingInfo.startTime) * 500,
+          }
+        );
+        toast.success(response.data.message);
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
     }
   };
 
@@ -96,7 +124,7 @@ const BookingPage = () => {
                       id="in-person"
                       className=" w-4 h-4 mr-4"
                       onChange={handleChange}
-                      value="In-person"
+                      value="In-Person"
                     />
                     In-person
                   </label>
@@ -153,6 +181,7 @@ const BookingPage = () => {
                     id="date"
                     onChange={handleChange}
                     value={bookingInfo.date}
+                    required
                   />
                 </div>
               </div>
@@ -165,56 +194,57 @@ const BookingPage = () => {
                     id="startTime"
                     onChange={handleChange}
                     value={bookingInfo.startTime}
+                    required
                   >
                     <option value="" className=" text-black">
                       Select
                     </option>
-                    <option value="0600" className=" text-black">
+                    <option value="06" className=" text-black">
                       06:00
                     </option>
-                    <option value="0700" className=" text-black">
+                    <option value="07" className=" text-black">
                       07:00
                     </option>
-                    <option value="0800" className=" text-black">
+                    <option value="08" className=" text-black">
                       08:00
                     </option>
-                    <option value="0900" className=" text-black">
+                    <option value="09" className=" text-black">
                       09:00
                     </option>
-                    <option value="1000" className=" text-black">
+                    <option value="10" className=" text-black">
                       10:00
                     </option>
-                    <option value="1100" className=" text-black">
+                    <option value="11" className=" text-black">
                       11:00
                     </option>
-                    <option value="1200" className=" text-black">
+                    <option value="12" className=" text-black">
                       12:00
                     </option>
-                    <option value="1300" className=" text-black">
+                    <option value="13" className=" text-black">
                       13:00
                     </option>
-                    <option value="1400" className=" text-black">
+                    <option value="14" className=" text-black">
                       14:00
                     </option>
-                    <option value="1500" className=" text-black">
+                    <option value="15" className=" text-black">
                       15:00
                     </option>
-                    <option value="1600" className=" text-black">
+                    <option value="16" className=" text-black">
                       16:00
                     </option>
-                    <option value="1700" className=" text-black">
+                    <option value="17" className=" text-black">
                       17:00
                     </option>
-                    <option value="1800" className=" text-black">
+                    <option value="18" className=" text-black">
                       18:00
                     </option>
-                    <option value="1900" className=" text-black">
+                    <option value="19" className=" text-black">
                       19:00
                     </option>
-                    <option value="2000" className=" text-black">
+                    <option value="20" className=" text-black">
                       20:00
                     </option>
-                    <option value="2100" className=" text-black">
+                    <option value="21" className=" text-black">
                       21:00
                     </option>
                   </select>
@@ -229,56 +259,57 @@ const BookingPage = () => {
                     id="endTime"
                     onChange={handleChange}
                     value={bookingInfo.endTime}
+                    required
                   >
                     <option value="" className=" text-black">
                       Select
                     </option>
-                    <option value="0700" className=" text-black">
+                    <option value="07" className=" text-black">
                       07:00
                     </option>
-                    <option value="0800" className=" text-black">
+                    <option value="08" className=" text-black">
                       08:00
                     </option>
-                    <option value="0900" className=" text-black">
+                    <option value="09" className=" text-black">
                       09:00
                     </option>
-                    <option value="1000" className=" text-black">
+                    <option value="10" className=" text-black">
                       10:00
                     </option>
-                    <option value="1100" className=" text-black">
+                    <option value="11" className=" text-black">
                       11:00
                     </option>
-                    <option value="1200" className=" text-black">
+                    <option value="12" className=" text-black">
                       12:00
                     </option>
-                    <option value="1300" className=" text-black">
+                    <option value="13" className=" text-black">
                       13:00
                     </option>
-                    <option value="1400" className=" text-black">
+                    <option value="14" className=" text-black">
                       14:00
                     </option>
-                    <option value="1500" className=" text-black">
+                    <option value="15" className=" text-black">
                       15:00
                     </option>
-                    <option value="1600" className=" text-black">
+                    <option value="16" className=" text-black">
                       16:00
                     </option>
-                    <option value="1700" className=" text-black">
+                    <option value="17" className=" text-black">
                       17:00
                     </option>
-                    <option value="1800" className=" text-black">
+                    <option value="18" className=" text-black">
                       18:00
                     </option>
-                    <option value="1900" className=" text-black">
+                    <option value="19" className=" text-black">
                       19:00
                     </option>
-                    <option value="2000" className=" text-black">
+                    <option value="20" className=" text-black">
                       20:00
                     </option>
-                    <option value="2100" className=" text-black">
+                    <option value="21" className=" text-black">
                       21:00
                     </option>
-                    <option value="2200" className=" text-black">
+                    <option value="22" className=" text-black">
                       22:00
                     </option>
                   </select>
@@ -298,14 +329,14 @@ const BookingPage = () => {
                     <img src={calender} className=" w-8 h-8" alt="" />
                     <p>Date</p>
                   </div>
-                  <p>01-03-2024</p>
+                  <p>{bookingInfo.date}</p>
                 </div>
               </div>
               <div className=" w-full text-lg">
                 <div className=" w-full flex justify-between items-center ">
                   <div className=" flex items-center gap-4">
                     <img src={rupee} className=" w-8 h-8" alt="" />
-                    <p>Amount</p>
+                    <p>Amount / hr</p>
                   </div>
                   <p>Rs. 500</p>
                 </div>
@@ -316,7 +347,7 @@ const BookingPage = () => {
                     <img src={clock} className=" w-8 h-8" alt="" />
                     <p>Duration</p>
                   </div>
-                  <p>2 hrs</p>
+                  <p>{bookingInfo.endTime - bookingInfo.startTime} hrs</p>
                 </div>
               </div>
               <hr className=" w-full h-px bg-gray-500 border-0" />
@@ -326,14 +357,17 @@ const BookingPage = () => {
                     <img src={total} className=" w-8 h-8" alt="" />
                     <p>Total</p>
                   </div>
-                  <p>Rs. 600</p>
+                  <p>
+                    Rs. {(bookingInfo.endTime - bookingInfo.startTime) * 500}
+                  </p>
                 </div>
               </div>
               <button
                 className=" w-full bg-green-500 py-3 text-2xl font-semibold rounded-xl text-black"
                 onClick={bookSession}
               >
-                Proceed to pay Rs. 600
+                Proceed to pay Rs.{" "}
+                {(bookingInfo.endTime - bookingInfo.startTime) * 500}
               </button>
             </div>
           </div>

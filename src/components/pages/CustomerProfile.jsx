@@ -33,7 +33,7 @@ const CustomerProfile = () => {
                 <h1 className=" font-semibold">Account Information</h1>
                 <section className=" flex gap-4">
                   <Link
-                    to={`/customer/${user.name}/${user._id}/my-bookings`}
+                    to={`/customer/${user._id}/my-bookings`}
                     className=" text-lg border rounded-lg px-6 py-2"
                   >
                     View Bookings

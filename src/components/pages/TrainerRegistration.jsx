@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useUserContext } from "../../utils/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const steps = [
   "Personal Details",
@@ -19,11 +20,29 @@ const steps = [
 const TrainerRegistration = () => {
   const { user, loginUser } = useUserContext();
 
+  const cookies = document.cookie;
+
+  // Parse cookies into an object
+  const cookieObj = cookies.split(";").reduce((acc, cookie) => {
+    const [name, value] = cookie.trim().split("=");
+    acc[name] = value;
+    return acc;
+  }, {});
+
+  // Access specific cookie
+  // const userEmail = cookieObj["email"];
+  // const userAccessToken = cookieObj["token"];
+  const userId = cookieObj["id"];
+
+  console.log(userId);
+
   useEffect(() => {
     // Call the loginUser function when the component mounts
-    loginUser();
+    user && loginUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this effect runs only once
+
+  const navigate = useNavigate();
 
   const [activeStep, setActiveStep] = useState(0);
 
@@ -94,6 +113,8 @@ const TrainerRegistration = () => {
           },
         }
       );
+      document.cookie = `profileStatus=complete; path=/`;
+      navigate(`/trainer/${userId}`);
       console.log(response);
     } catch (error) {
       console.log(error);

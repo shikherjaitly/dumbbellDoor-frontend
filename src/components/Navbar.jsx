@@ -1,29 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import dumbbelldoorLogo from "../assets/dumbbelldoorLogo.png";
 import { useUserContext } from "../utils/UserContext";
-import { useCookies } from 'react-cookie';
-
+import { useCookies } from "react-cookie";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const Navbar = () => {
-  
-  const { loginUser } = useUserContext();
-  const [cookies] = useCookies(['role']);
+  const { user, loginUser, setUser } = useUserContext();
+  const [cookies] = useCookies([]);
+  const navigate = useNavigate();
 
-  // Access the value of the cookie
-  // const cookieValue = cookies.cookieName;
-
-  console.log(loginUser);
   useEffect(() => {
-    // Call the loginUser function when the component mounts
-    loginUser();
+    user && loginUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, []);
 
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = async () => {
+    try {
+      const token = cookies.token; // Assuming the token cookie name is 'token'
+
+      // Make a request to the backend logout endpoint with token in headers
+      await axios.post(
+        "https://dumbbelldoor-backned.onrender.com/api/auth/logout",
+        { token }
+      );
+
+      // Clear all cookies after successful logout
+      Object.keys(cookies).forEach((cookie) => {
+        Cookies.remove(cookie);
+      });
+      setUser(null);
+      // Redirect to login page
+      navigate("/login");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
   };
 
   return (
@@ -55,12 +73,16 @@ const Navbar = () => {
         </div>
         <ul className="hidden lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-10 mt-5">
           <li>
-            <Link
-              className="text-lg text-gray-400 hover:text-gray-500 transition-all"
-              to="/trainers"
-            >
-              Find Trainers
-            </Link>
+            {" "}
+            {cookies.role === "Customer" || cookies.role === undefined ? (
+              <Link
+                className="text-lg text-gray-400 hover:text-gray-500 transition-all"
+                to="/trainers"
+              >
+                {" "}
+                Find Trainers{" "}
+              </Link>
+            ) : null}{" "}
           </li>
           <li>
             <Link className="text-lg text-gray-400 hover:text-gray-500 transition-all">
@@ -72,24 +94,30 @@ const Navbar = () => {
               Contact Us
             </Link>
           </li>
-          {/* if (req.cookies.accessToken) render dynamically*/}
           <li>
             <Link
               className="text-lg text-gray-400 hover:text-gray-500 transition-all"
               to={`${
-                cookies
+                cookies.email
                   ? cookies.role === "Trainer"
-                    ? `/trainer/${cookies.id}`
-                    : `/customer/${cookies.id}`
+                    ? cookies.profileStatus === "complete"
+                      ? `/trainer/${cookies.id}`
+                      : "/trainer/build-your-profile"
+                    : cookies.profileStatus === "complete"
+                    ? `/customer/${cookies.id}`
+                    : "/customer/your-details"
                   : "/login"
               }`}
             >
-              {cookies ? "My Profile" : "Login/Signup"}
+              {cookies.email !== undefined ? "My Profile" : "Login/Signup"}
             </Link>
           </li>
           <li>
-            <Link className="text-lg text-gray-400 hover:text-gray-500 transition-all">
-              logout
+            <Link
+              className="text-lg text-gray-400 hover:text-gray-500 transition-all"
+              onClick={handleLogout}
+            >
+              {cookies.email ? "Logout" : null}
             </Link>
           </li>
         </ul>
