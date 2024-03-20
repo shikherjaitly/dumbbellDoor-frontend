@@ -37,7 +37,7 @@ export default function App() {
           <Route path="/trainer/:trainerID" element={<TrainerProfile />} />
           <Route path="/customer/:customerID" element={<CustomerProfile />} />
           <Route
-            path="/trainer/:trainerName/:trainerID/book-session"
+            path="/trainer/:trainerID/book-session"
             element={<BookingPage />}
           />
           <Route

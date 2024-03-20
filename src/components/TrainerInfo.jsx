@@ -15,16 +15,25 @@ import t3 from "../assets/t3.jpg";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaSquareWhatsapp } from "react-icons/fa6";
-import { useCookies } from 'react-cookie';
-
+import { useCookies } from "react-cookie";
 
 const LineSeparator = ({ trainer }) => {
-
-  const [cookies] = useCookies(['id', 'role']); 
+  const [cookies] = useCookies(["id", "role"]);
 
   const onGroupButtonClick = useCallback(() => {
     // Please sync "Booking Page" to the project
   }, []);
+
+  // const cookies = document.cookie;
+
+  // // Parse cookies into an object
+  // const cookieObj = cookies.split(";").reduce((acc, cookie) => {
+  //   const [name, value] = cookie.trim().split("=");
+  //   acc[name] = value;
+  //   return acc;
+  // }, {});
+
+  // const userId = cookieObj["id"];
 
   return (
     <div className="w-[73.25rem] flex flex-row items-start justify-start py-[0rem] px-[0.688rem] box-border max-w-full text-left text-[2.5rem] text-white font-alata">
@@ -77,20 +86,32 @@ const LineSeparator = ({ trainer }) => {
                           </div>
                         </div>
                         {cookies["id"] ? (
-                          cookies["role"] === "Trainer" ? null : ( 
+                          cookies["role"] === "Trainer" ? null : (
+                            <button
+                              className="cursor-pointer [border:none] pt-2 pb-2 bg-yellowgreen self-stretch rounded-8xs flex flex-row items-center justify-center whitespace-nowrap hover:bg-forestgreen rounded-lg"
+                              onClick={onGroupButtonClick}
+                            >
+                              <Link
+                                to={`/trainer/${trainer._id}/book-session`}
+                                className="flex-1 relative text-[1.875rem] font-medium font-rubik text-black text-center z-[1]"
+                              >
+                                Book a session
+                              </Link>
+                            </button>
+                          )
+                        ) : (
                           <button
                             className="cursor-pointer [border:none] pt-2 pb-2 bg-yellowgreen self-stretch rounded-8xs flex flex-row items-center justify-center whitespace-nowrap hover:bg-forestgreen rounded-lg"
                             onClick={onGroupButtonClick}
                           >
                             <Link
-                              to={`/trainer/${trainer.name}/${trainer._id}/book-session`}
+                              to="/login"
                               className="flex-1 relative text-[1.875rem] font-medium font-rubik text-black text-center z-[1]"
                             >
                               Book a session
                             </Link>
                           </button>
-                          ) 
-                        ): null}
+                        )}
                       </div>
                     </div>
                   </div>
@@ -108,15 +129,23 @@ const LineSeparator = ({ trainer }) => {
             <div className="w-[40.813rem] flex flex-col items-start justify-start pt-[2.625rem] px-[0rem] pb-[0rem] box-border max-w-full text-center text-[0.938rem] text-gray-200 font-rubik mq750:pt-[1.688rem] mq750:box-border">
               {" "}
               {cookies["id"] ? (
-                  cookies["role"] === "Trainer" ? (
-              <section className=" w-full flex gap-4 justify-end mb-8">
-                <Link to={`/trainer/${trainer._id}/my-bookings`} className=" px-6 py-2 border rounded-lg">
-                    View Bookings
-                </Link >
-                <Link to="/trainer/build-your-profile" className=" px-6 py-2 border rounded-lg">
-                  Edit Profile
-                </Link> 
-              </section> ): null) : null}
+                cookies["role"] === "Trainer" ? (
+                  <section className=" w-full flex gap-4 justify-end mb-8">
+                    <Link
+                      to={`/trainer/${trainer._id}/my-bookings`}
+                      className=" px-6 py-2 border rounded-lg"
+                    >
+                      View Bookings
+                    </Link>
+                    <Link
+                      to="/trainer/build-your-profile"
+                      className=" px-6 py-2 border rounded-lg"
+                    >
+                      Edit Profile
+                    </Link>
+                  </section>
+                ) : null
+              ) : null}
               <div className="self-stretch flex flex-col items-start justify-start gap-[2.5rem_0rem] max-w-full mq750:gap-[2.5rem_0rem]">
                 <div className="self-stretch flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.25rem] box-border max-w-full text-justify text-[1.125rem] text-white">
                   <div className="flex-1 relative leading-[1.875rem] font-light inline-block max-w-full">
