@@ -98,11 +98,11 @@ const CustomerBookings = () => {
                 {filteredBookings &&
                   filteredBookings.map((booking) => (
                     <tr key={booking._id} className=" text-gray-400">
-                      <td className=" py-3">{booking.date}</td>
+                      <td className=" py-3">{booking.date} </td>
                       <td className=" py-3">{booking.trainerName}</td>
                       <td className=" py-3">{booking.workoutType}</td>
-                      <td className=" py-3">{booking.startTime} hrs</td>
-                      <td className=" py-3">{booking.endTime} hrs</td>
+                      <td className=" py-3">{booking.startTime}00 hrs</td>
+                      <td className=" py-3">{booking.endTime}00 hrs</td>
                       <td className=" py-3">Rs. {booking.amount}</td>
                       <td className=" py-3">{booking.bookingStatus}</td>
                       {booking.bookingStatus === "Requested" && (

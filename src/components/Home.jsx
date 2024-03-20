@@ -48,7 +48,11 @@ const Home = () => {
                     Find Trainers
                   </button>
                 </Link>
-              ) : null
+              ) : (<Link to={`/trainer/${cookies["id"]}/my-bookings`}>
+                  <button className="flex items-center justify-center px-28 mb-3 py-4 text-xl text-center text-black font-lato bg-sky-400 hover:bg-sky-500 transition-all rounded-full">
+                    My Bookings
+                  </button>
+                </Link>)
             ) : (
               <Link to="/login">
                 <button className="flex items-center justify-center px-28 mb-3 py-4 text-xl text-center text-black font-lato bg-sky-400 hover:bg-sky-500 transition-all rounded-full">

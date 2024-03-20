@@ -3,8 +3,11 @@ import TestimonialsCarousel from "./TestimonialsCards";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import TrainerCard from "./TrainerCard";
+import { Button } from "@mui/material";
+import { useCookies } from 'react-cookie';
 
 const FrameComponent1 = () => {
+  const [cookies] = useCookies(['role']); 
   const [trainers, setTrainers] = useState([]);
 
   const getTrainers = async () => {
@@ -32,11 +35,25 @@ const FrameComponent1 = () => {
       </div>
       <div className="self-stretch flex flex-col flex-wrap items-center justify-center pt-[0rem] px-[0rem] pb-[1.188rem] gap-[0rem_1.188rem] text-[0.938rem] text-black">
         <TrainerCard trainers={trainers.slice(0, 4)} />
-        <Link
-          className="flex mt-8 justify-end bg-white relative right-[-27rem] rounded-lg px-8 py-2 text-xl text-black cursor-pointer"
-          to="/trainers"
-        >
-          More Trainers
+        <Link to="/trainers">
+          {cookies["role"] === "Customer" ? (
+            <Button
+              className="w-[10.5rem] h-[2.5rem] cursor-pointer"
+              disableElevation={true}
+              variant="contained"
+              sx={{
+                textTransform: "none",
+                color: "#000",
+                fontSize: "20",
+                background: "#fff",
+                borderRadius: "10px",
+                "&:hover": { background: "#fff" },
+                width: 168,
+                height: 40,
+              }}
+            >
+              More Trainers
+            </Button> )  : null }
         </Link>
       </div>
       <TestimonialsCarousel />

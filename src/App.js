@@ -48,7 +48,7 @@ export default function App() {
             path="/customer/:customerID/my-bookings"
             element={<CustomerBookings />}
           />
-          <Route path="/trainer/my-bookings" element={<TrainerBookings />} />
+          <Route path="/trainer/:trainerID/my-bookings" element={<TrainerBookings />} />
         </Routes>
       </div>
     </ContextProvider>

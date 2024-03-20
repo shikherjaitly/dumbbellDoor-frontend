@@ -91,7 +91,7 @@ const Signup = () => {
                     className="w-[1rem] h-[1rem]"
                   />
 
-                  <label htmlFor="Trainee">Trainee</label>
+                  <label htmlFor="Trainee">Customer</label>
                 </div>
                 <div className="flex justify-center items-center gap-2 grow px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500">
                   <input

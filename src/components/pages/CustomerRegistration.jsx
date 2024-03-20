@@ -30,10 +30,17 @@ const CustomerRegistration = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setCustomerInfo((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    // Validation functions
+    const isValidName = /^[a-zA-Z\s]*$/.test(value) && value.length <= 30;
+    // Show error message for invalid name
+    if (name === "name" && !isValidName) {
+      toast.error("Name should contain only letters and be less than 30 characters");
+    } else {
+      setCustomerInfo((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
   };
 
   // List of metro city locations in India
@@ -50,8 +57,8 @@ const CustomerRegistration = () => {
   const preferredlanguages = [
     "Select language",
     "English",
-    "Marathi",
     "Hindi",
+    "Marathi",
     "Kannada",
   ];
 

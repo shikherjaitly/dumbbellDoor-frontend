@@ -41,8 +41,8 @@ const EditCustomerProfile = ({ user, setOpen }) => {
   const preferredlanguages = [
     "Select language",
     "English",
-    "Marathi",
     "Hindi",
+    "Marathi",
     "Kannada",
   ];
 
