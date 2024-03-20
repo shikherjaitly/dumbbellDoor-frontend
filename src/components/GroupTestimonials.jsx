@@ -6,6 +6,7 @@ import t1 from "../assets/t1.jpg"
 import t2 from "../assets/t2.jpg"
 import t3 from "../assets/t3.jpg"
 import t4 from "../assets/t4.jpg"
+import { Link } from "react-router-dom";
 
 const FrameComponent1 = () => {
   const onGroupContainerClick = useCallback(() => {
@@ -63,24 +64,26 @@ const FrameComponent1 = () => {
             propAlignSelf="stretch"
             onGroupContainerClick={onGroupContainer3Click}
           />
-          <Button
-            className="w-[10.5rem] h-[2.5rem] cursor-pointer"
-            disableElevation={true}
-            variant="contained"
-            sx={{
-              textTransform: "none",
-              color: "#000",
-              fontSize: "20",
-              background: "#fff",
-              borderRadius: "10px",
-              "&:hover": { background: "#fff" },
-              width: 168,
-              height: 40,
-            }}
-            onClick={onGroupButtonClick}
-          >
-            More Trainers
-          </Button>
+          <Link to="/trainers">
+            <Button
+              className="w-[10.5rem] h-[2.5rem] cursor-pointer"
+              disableElevation={true}
+              variant="contained"
+              sx={{
+                textTransform: "none",
+                color: "#000",
+                fontSize: "20",
+                background: "#fff",
+                borderRadius: "10px",
+                "&:hover": { background: "#fff" },
+                width: 168,
+                height: 40,
+              }}
+              onClick={onGroupButtonClick}
+            >
+              More Trainers
+            </Button>
+          </Link>
         </div>
       </div>
       <TestimonialsCarousel  /> 

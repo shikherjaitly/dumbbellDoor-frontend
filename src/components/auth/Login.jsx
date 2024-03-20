@@ -51,11 +51,13 @@ const Login = () => {
         background: "linear-gradient(to right, #29000F, #00101C)",
       }}
     >
+    <Link to="/">
       <img
         src={dumbbelldoorLogo}
         alt="Logo"
         className="absolute top-0 left-0 m-4 max-w-full h-auto w-24  md:w-44 lg:w-48 xl:w-64"
       />
+    </Link>
       <div className="container mx-auto w-96 border-2 border-gray-500 rounded-xl">
         <div className="max-w-md mx-auto my-10">
           <div className="text-center">

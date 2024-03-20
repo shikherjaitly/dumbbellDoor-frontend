@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import dumbbelldoorLogo from "../assets/dumbbelldoorLogo.png";
 import { useUserContext } from "../utils/UserContext";
 import { useCookies } from 'react-cookie';
-// import { useUserContext } from "../utils/UserContext";
+
 
 const Navbar = () => {
-  // const { user } = useUserContext();
-  const { user, loginUser } = useUserContext();
+  
+  const { loginUser } = useUserContext();
   const [cookies] = useCookies(['role']);
 
   // Access the value of the cookie

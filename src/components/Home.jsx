@@ -3,21 +3,25 @@ import Navbar from "./Navbar";
 import backgroundImage from "../assets/homeBackground.png";
 import HeaderFrame from "./pages/HeaderFrame";
 import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie'; // Import useCookies hook
 import { useUserContext } from "../utils/UserContext";
 
 const Home = () => {
-  const { loginUser, user } = useUserContext();
+  const [cookies] = useCookies(['id', 'role']); // Initialize cookies
+  const { loginUser } = useUserContext();
 
   useEffect(() => {
-    // Call the loginUser function when the component mounts
-    loginUser();
+    const fetchData = async () => {
+      await loginUser().catch((error) => console.error("Error logging in:", error));
+    };
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this effect runs only once
 
   return (
-    <div className=" w-full overflow-hidden">
+    <div className="w-full overflow-hidden">
       <div
-        className=" w-screen h-screen"
+        className="w-screen h-screen"
         style={{
           backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
@@ -37,12 +41,19 @@ const Home = () => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 flex justify-center mb-8">
           <div className="pt-6 flex">
-            {!user && ( // Render login button only if user details are not present
-              <Link
-                to="/login"
-                className="flex items-center justify-center px-28 mb-3 py-4 text-xl text-center text-black font-lato bg-sky-400 hover:bg-sky-500 transition-all rounded-full"
-              >
-                Login
+            {cookies["id"] ? (
+              cookies["role"] === "Customer" ? (
+                <Link to="/trainers">
+                  <button className="flex items-center justify-center px-28 mb-3 py-4 text-xl text-center text-black font-lato bg-sky-400 hover:bg-sky-500 transition-all rounded-full">
+                    Find Trainers
+                  </button>
+                </Link>
+              ) : null
+            ) : (
+              <Link to="/login">
+                <button className="flex items-center justify-center px-28 mb-3 py-4 text-xl text-center text-black font-lato bg-sky-400 hover:bg-sky-500 transition-all rounded-full">
+                  Login
+                </button>
               </Link>
             )}
           </div>
