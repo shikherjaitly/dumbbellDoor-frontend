@@ -104,22 +104,24 @@ const LineSeparator = ({ trainer, user }) => {
               {" "}
               {user && user.role === "Trainer" ? (
                 <section className=" w-full flex gap-4 justify-end mb-8">
-                <button className=" px-6 py-2 border rounded-lg">
-                  View Bookings
-                </button>
-                <button className=" px-6 py-2 border rounded-lg">
-                  Edit Profile
-                </button>
-              </section>  ) : ( "" 
+                  <button className=" px-6 py-2 border rounded-lg">
+                    View Bookings
+                  </button>
+                  <button className=" px-6 py-2 border rounded-lg">
+                    Edit Profile
+                  </button>
+                </section>
+              ) : (
+                ""
               )}
-              <div className="self-stretch flex flex-col items-start justify-start gap-[2.5rem_0rem] max-w-full mq750:gap-[2.5rem_0rem]">
-                <div className="self-stretch flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.25rem] box-border max-w-full text-justify text-[1.125rem] text-white">
-                  <div className="flex-1 relative leading-[1.875rem] font-light inline-block max-w-full">
+              <div className=" flex flex-col items-start justify-start gap-[2.5rem_0rem] w-full mq750:gap-[2.5rem_0rem]">
+                <div className="flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.25rem] box-border w-full text-justify text-[1.125rem] text-white">
+                  <div className="flex-1 relative leading-[1.875rem] font-light inline-block w-full">
                     {trainer.description}
                   </div>
                 </div>
-                <div className=" w-full flex flex-col gap-10 items-start justify-start pt-[0rem] px-[0rem] pb-[0.813rem] box-border max-w-full mq750:flex-wrap">
-                  <div className=" flex gap-4 justify-center items-center">
+                <div className=" w-full flex flex-col gap-10 items-start justify-start pt-[0rem] px-[0rem] pb-[0.813rem] box-border mq750:flex-wrap">
+                  <div className=" w-full flex gap-4 justify-start items-center">
                     <img
                       className="h-[3.75rem] w-[3.75rem] mr-4 relative object-cover"
                       loading="lazy"
@@ -144,7 +146,7 @@ const LineSeparator = ({ trainer, user }) => {
                       </div>
                     </div>
                   </div>
-                  <div className=" flex gap-4 justify-center items-center">
+                  <div className="  w-full flex gap-4 justify-start items-center">
                     <img
                       className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
                       loading="lazy"
@@ -171,7 +173,7 @@ const LineSeparator = ({ trainer, user }) => {
                       </div>
                     </div>
                   </div>
-                  <div className=" flex gap-4 justify-center items-center">
+                  <div className="  w-full flex gap-4 justify-start items-center">
                     <img
                       className="w-[3.75rem] h-[3.75rem] mr-4 relative"
                       loading="lazy"
@@ -196,32 +198,56 @@ const LineSeparator = ({ trainer, user }) => {
                       </div>
                     </div>
                   </div>
-                  <div className=" flex gap-4 justify-center items-center">
+                  <div className=" w-full flex gap-4 justify-start items-center">
                     <img
                       className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
                       loading="lazy"
                       alt=""
                       src={calendar}
                     />
-                    <div className=" flex flex-col gap-2 items-start">
+                    <div className="  w-full flex flex-col gap-2 items-start">
                       <p>A V A I L A B I L I T Y </p>
-                      <div>
+                      <div className="w-full">
                         <div className="w-full flex-1 flex flex-row items-start justify-start gap-[0rem_0.875rem]">
-                          {trainer &&
-                            trainer.typesOfServices &&
-                            trainer.typesOfServices.map((service, index) => (
-                              <p
-                                key={index}
-                                className="  border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md"
-                              >
-                                {service}
-                              </p>
-                            ))}
+                          {trainer && trainer.typesOfServices && (
+                            <table className=" w-full">
+                              <tr>
+                                <th className=" text-left text-gray-500 pb-2">
+                                  Sl no.
+                                </th>{" "}
+                                <th className=" text-left text-gray-500 pb-2">
+                                  Day
+                                </th>{" "}
+                                <th className=" text-left text-gray-500 pb-2">
+                                  Start Time
+                                </th>{" "}
+                                <th className=" text-left text-gray-500 pb-2">
+                                  End Time
+                                </th>{" "}
+                              </tr>
+                              {trainer.availability.map((schedule, index) => (
+                                <tr key={index} className=" w-full">
+                                  <td className=" text-left pb-1">
+                                    {index + 1}
+                                  </td>
+                                  <td className=" text-left pb-1">
+                                    {schedule.day}
+                                  </td>
+                                  <td className=" text-left pb-1">
+                                    {schedule.startTime}:00 hrs
+                                  </td>
+                                  <td className=" text-left pb-1">
+                                    {schedule.endTime}:00 hrs
+                                  </td>
+                                </tr>
+                              ))}
+                            </table>
+                          )}
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className=" flex gap-4 justify-center items-center">
+                  <div className=" w-full flex gap-4 justify-start items-center">
                     <img
                       className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
                       loading="lazy"

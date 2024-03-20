@@ -69,7 +69,7 @@ const FrameGroupInstaFbCheckPro = ({ propWidth, propGap, trainers }) => {
                 </span>
 
                 <Link
-                  to={`/trainer/${trainer.name}/${trainer._id}`}
+                  to={`/trainer/${trainer._id}`}
                   className=" bg-white flex flex-row items-center justify-center pt-[0.188rem] pb-[0.25rem] pr-[0.813rem] pl-[0.75rem] whitespace-nowrap z-[1] cursor-pointer rounded-xl font-normal hover:bg-black hover:text-white transition-all"
                 >
                   Check profile

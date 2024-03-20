@@ -6,7 +6,7 @@ import { useUserContext } from "../../utils/UserContext.js";
 import { useEffect, useState } from "react";
 
 const CustomerBookings = () => {
-  const { loginUser, user, getBookings } = useUserContext();
+  const { loginUser, user, getCustomerBookings } = useUserContext();
 
   const [bookings, setBookings] = useState([]);
   const [filteredBookings, setFilteredBookings] = useState([]);
@@ -19,7 +19,7 @@ const CustomerBookings = () => {
 
   useEffect(() => {
     const fetchBookings = async () => {
-      const myBookings = user && (await getBookings(user.email));
+      const myBookings = user && (await getCustomerBookings(user.email));
       setBookings(myBookings);
       setFilteredBookings(myBookings);
     };

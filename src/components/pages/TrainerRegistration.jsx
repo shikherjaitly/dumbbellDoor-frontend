@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
@@ -7,6 +7,7 @@ import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import { useUserContext } from "../../utils/UserContext";
 
 const steps = [
   "Personal Details",
@@ -16,6 +17,14 @@ const steps = [
 ];
 
 const TrainerRegistration = () => {
+  const { user, loginUser } = useUserContext();
+
+  useEffect(() => {
+    // Call the loginUser function when the component mounts
+    loginUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array ensures this effect runs only once
+
   const [activeStep, setActiveStep] = useState(0);
 
   const [availability, setAvailability] = useState([]);
@@ -28,7 +37,7 @@ const TrainerRegistration = () => {
     yearsOfExperience: "",
     certifications: "",
     specializations: "",
-    typesOfServices: "",
+    typesOfServices: [],
     day: "",
     startTime: "",
     endTime: "",
@@ -53,13 +62,28 @@ const TrainerRegistration = () => {
     const formData = new FormData();
 
     // Append each field to FormData
-    Object.keys(trainerInfo).forEach((key) => {
-      formData.append(key, trainerInfo[key]);
+    formData.append("email", user.email);
+    formData.append("name", trainerInfo.name);
+    formData.append("gender", trainerInfo.gender);
+    formData.append("profilePicture", trainerInfo.profilePicture);
+    formData.append("description", trainerInfo.description);
+    formData.append("yearsOfExperience", trainerInfo.yearsOfExperience);
+    formData.append("certifications", trainerInfo.certifications);
+    formData.append("specializations", trainerInfo.specializations);
+    trainerInfo.typesOfServices.forEach((service) =>
+      formData.append("typesOfServices", service)
+    );
+    availability.forEach((schedule, index) => {
+      console.log(index, schedule);
+      formData.append(`availability[${index}][day]`, schedule.day);
+      formData.append(`availability[${index}][startTime]`, schedule.startTime);
+      formData.append(`availability[${index}][endTime]`, schedule.endTime);
     });
+    formData.append("location", trainerInfo.location);
+    formData.append("phoneNumber", trainerInfo.phoneNumber);
+    formData.append("facebookID", trainerInfo.facebookID);
+    formData.append("instagramID", trainerInfo.instagramID);
 
-    // Append availability as a JSON string
-    formData.append("availability", JSON.stringify(availability));
-    console.log(formData);
     try {
       const response = await axios.patch(
         "https://dumbbelldoor-backned.onrender.com/api/trainer/build-your-profile",
@@ -74,6 +98,15 @@ const TrainerRegistration = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // Handler for file change
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]; // Get the selected file
+    setTrainerInfo({
+      ...trainerInfo,
+      profilePicture: file, // Update the profilePicture in state
+    });
   };
 
   const handleChange = (e) => {
@@ -148,8 +181,8 @@ const TrainerRegistration = () => {
           className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
           placeholder="Profile Picture"
           name="profilePicture"
-          onChange={handleChange}
-          value={trainerInfo.profilePicture}
+          onChange={handleFileChange}
+          // value={trainerInfo.profilePicture}
         />
         <textarea
           className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none resize-none"
@@ -256,22 +289,22 @@ const TrainerRegistration = () => {
                 value={trainerInfo.startTime}
               >
                 <option value="">00:00</option>
-                <option value="0600">06:00</option>
-                <option value="0700">07:00</option>
-                <option value="0800">08:00</option>
-                <option value="0900">09:00</option>
-                <option value="1000">10:00</option>
-                <option value="1100">11:00</option>
-                <option value="1200">12:00</option>
-                <option value="1300">13:00</option>
-                <option value="1400">14:00</option>
-                <option value="1500">15:00</option>
-                <option value="1600">16:00</option>
-                <option value="1700">17:00</option>
-                <option value="1800">18:00</option>
-                <option value="1900">19:00</option>
-                <option value="2000">20:00</option>
-                <option value="2100">21:00</option>
+                <option value="06">06:00</option>
+                <option value="07">07:00</option>
+                <option value="08">08:00</option>
+                <option value="09">09:00</option>
+                <option value="10">10:00</option>
+                <option value="11">11:00</option>
+                <option value="12">12:00</option>
+                <option value="13">13:00</option>
+                <option value="14">14:00</option>
+                <option value="15">15:00</option>
+                <option value="16">16:00</option>
+                <option value="17">17:00</option>
+                <option value="18">18:00</option>
+                <option value="19">19:00</option>
+                <option value="20">20:00</option>
+                <option value="21">21:00</option>
               </select>
             </div>
             <div className=" flex gap-2">
@@ -284,22 +317,22 @@ const TrainerRegistration = () => {
                 value={trainerInfo.endTime}
               >
                 <option value="">00:00</option>{" "}
-                <option value="0700">07:00</option>
-                <option value="0800">08:00</option>
-                <option value="0900">09:00</option>
-                <option value="1000">10:00</option>
-                <option value="1100">11:00</option>
-                <option value="1200">12:00</option>
-                <option value="1300">13:00</option>
-                <option value="1400">14:00</option>
-                <option value="1500">15:00</option>
-                <option value="1600">16:00</option>
-                <option value="1700">17:00</option>
-                <option value="1800">18:00</option>
-                <option value="1900">19:00</option>
-                <option value="2000">20:00</option>
-                <option value="2100">21:00</option>
-                <option value="2200">22:00</option>
+                <option value="07">07:00</option>
+                <option value="08">08:00</option>
+                <option value="09">09:00</option>
+                <option value="10">10:00</option>
+                <option value="11">11:00</option>
+                <option value="12">12:00</option>
+                <option value="13">13:00</option>
+                <option value="14">14:00</option>
+                <option value="15">15:00</option>
+                <option value="16">16:00</option>
+                <option value="17">17:00</option>
+                <option value="18">18:00</option>
+                <option value="19">19:00</option>
+                <option value="20">20:00</option>
+                <option value="21">21:00</option>
+                <option value="22">22:00</option>
               </select>
             </div>
 
