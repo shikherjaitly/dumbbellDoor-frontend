@@ -67,7 +67,7 @@ const ContextProvider = ({ children }) => {
 
   const getCustomerBookings = async (email) => {
     try {
-      const endpoint = `http://localhost:8000/api/bookings/customer/${email}`;
+      const endpoint = `https://dumbbelldoor-backned.onrender.com/api/bookings/customer/${email}`;
 
       const response = await axios.get(endpoint);
 
@@ -93,6 +93,7 @@ const ContextProvider = ({ children }) => {
 
   const value = {
     user,
+    setUser,
     trainers,
     loginUser,
     // fetchUserDetails,

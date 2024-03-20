@@ -50,7 +50,7 @@ const CustomerBookings = () => {
                 <h1 className=" font-semibold">My Bookings</h1>
                 <section className=" flex gap-4">
                   <Link
-                    to={`/customer/${user.name}/${user._id}`}
+                    to={`/customer/${user._id}`}
                     className=" text-lg border rounded-lg px-6 py-2"
                   >
                     Back to Profile
@@ -102,13 +102,13 @@ const CustomerBookings = () => {
                       <td className=" py-3">{booking.trainerName}</td>
                       <td className=" py-3">{booking.workoutType}</td>
                       <td className=" py-3">{booking.startTime} hrs</td>
-                      <td className=" py-3">06:00 hrs</td>
+                      <td className=" py-3">{booking.endTime} hrs</td>
                       <td className=" py-3">Rs. {booking.amount}</td>
                       <td className=" py-3">{booking.bookingStatus}</td>
                       {booking.bookingStatus === "Requested" && (
                         <td className=" cursor-pointer text-white ">
                           <Link
-                            to={`/customer/${user.name}/editBooking/${booking._id}/${booking.trainerId}`}
+                            to={`/editBooking/${booking.trainerId}/${booking._id}`}
                           >
                             <FiEdit />
                           </Link>

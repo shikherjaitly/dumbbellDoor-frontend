@@ -87,8 +87,9 @@ const CustomerRegistration = () => {
           },
         }
       );
+      document.cookie = `profileStatus=complete; path=/`;
       toast.success(response.data.message);
-      navigate(`/customer/${user.name}/${user.id}`);
+      navigate(`/customer/${user.id}`);
     } catch (error) {
       toast.error(error.response.data.message);
     }

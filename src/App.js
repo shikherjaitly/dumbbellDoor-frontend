@@ -41,11 +41,11 @@ export default function App() {
             element={<BookingPage />}
           />
           <Route
-            path="/customer/editBooking/:bookingId/:trainerId"
+            path="editBooking/:trainerId/:bookingId"
             element={<EditBooking />}
           />
           <Route
-            path="/customer/:customerName/:customerID/my-bookings"
+            path="/customer/:customerID/my-bookings"
             element={<CustomerBookings />}
           />
           <Route path="/trainer/my-bookings" element={<TrainerBookings />} />

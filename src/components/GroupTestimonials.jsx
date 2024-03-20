@@ -1,32 +1,26 @@
-import { useCallback } from "react";
-import { Button } from "@mui/material";
-import GroupComponent from "./CardComponent";
+import { useEffect, useState } from "react";
 import TestimonialsCarousel from "./TestimonialsCards";
-import t1 from "../assets/t1.jpg"
-import t2 from "../assets/t2.jpg"
-import t3 from "../assets/t3.jpg"
-import t4 from "../assets/t4.jpg"
 import { Link } from "react-router-dom";
+import axios from "axios";
+import TrainerCard from "./TrainerCard";
 
 const FrameComponent1 = () => {
-  const onGroupContainerClick = useCallback(() => {
-    // Please sync "Login" to the project
-  }, []);
+  const [trainers, setTrainers] = useState([]);
 
-  const onGroupContainer1Click = useCallback(() => {
-    // Please sync "Login" to the project
-  }, []);
+  const getTrainers = async () => {
+    try {
+      await axios
+        .get(
+          "https://dumbbelldoor-backned.onrender.com/api/trainer/getTrainers"
+        )
+        .then((data) => setTrainers(data.data.message));
+    } catch (error) {
+      console.log(error.response.data.message);
+    }
+  };
 
-  const onGroupContainer2Click = useCallback(() => {
-    // Please sync "Login" to the project
-  }, []);
-
-  const onGroupContainer3Click = useCallback(() => {
-    // Please sync "Login" to the project
-  }, []);
-
-  const onGroupButtonClick = useCallback(() => {
-    // Please sync "Login" to the project
+  useEffect(() => {
+    getTrainers();
   }, []);
 
   return (
@@ -36,57 +30,16 @@ const FrameComponent1 = () => {
           Star Trainers
         </h1>
       </div>
-      <div className="self-stretch flex flex-row flex-wrap items-start justify-center pt-[0rem] px-[0rem] pb-[1.188rem] gap-[0rem_1.188rem] text-[0.938rem] text-black font-rubik">
-        <GroupComponent
-          star={t1}
-          prop="5 ⭐"
-          onGroupContainerClick={onGroupContainerClick}
-        />
-        <GroupComponent
-          star={t3}
-          prop="4 ⭐"
-          propWidth="15.625rem"
-          propAlignSelf="unset"
-          onGroupContainerClick={onGroupContainer1Click}
-        />
-        <GroupComponent
-          star={t4}
-          prop="4 ⭐"
-          propWidth="15.625rem"
-          propAlignSelf="unset"
-          onGroupContainerClick={onGroupContainer2Click}
-        />
-        <div className="flex-1 flex flex-col items-end justify-start py-[0rem] pr-[0rem] pl-[0.125rem] box-border gap-[1.125rem_0rem] min-w-[10.125rem]">
-          <GroupComponent
-            star={t2}
-            prop="5 ⭐"
-            propWidth="unset"
-            propAlignSelf="stretch"
-            onGroupContainerClick={onGroupContainer3Click}
-          />
-          <Link to="/trainers">
-            <Button
-              className="w-[10.5rem] h-[2.5rem] cursor-pointer"
-              disableElevation={true}
-              variant="contained"
-              sx={{
-                textTransform: "none",
-                color: "#000",
-                fontSize: "20",
-                background: "#fff",
-                borderRadius: "10px",
-                "&:hover": { background: "#fff" },
-                width: 168,
-                height: 40,
-              }}
-              onClick={onGroupButtonClick}
-            >
-              More Trainers
-            </Button>
-          </Link>
-        </div>
+      <div className="self-stretch flex flex-col flex-wrap items-center justify-center pt-[0rem] px-[0rem] pb-[1.188rem] gap-[0rem_1.188rem] text-[0.938rem] text-black">
+        <TrainerCard trainers={trainers.slice(0, 4)} />
+        <Link
+          className="flex mt-8 justify-end bg-white relative right-[-27rem] rounded-lg px-8 py-2 text-xl text-black cursor-pointer"
+          to="/trainers"
+        >
+          More Trainers
+        </Link>
       </div>
-      <TestimonialsCarousel  /> 
+      <TestimonialsCarousel />
     </div>
   );
 };

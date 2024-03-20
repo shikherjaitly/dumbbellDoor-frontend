@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-// import { ToastContainer } from "react-toastify";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import tickmark from "../../assets/tickmark.png";
 import Navbar from "../Navbar";
+import { useUserContext } from "../../utils/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const EditBooking = () => {
-  const { trainerId } = useParams();
+  const { trainerId, bookingId } = useParams();
   const [trainer, setTrainer] = useState({});
+
+  const { user, loginUser } = useUserContext();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    user && loginUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const [bookingInfo, setBookingInfo] = useState({
     modeOfTraining: "",
@@ -37,19 +48,40 @@ const EditBooking = () => {
     fetchTrainerDetails();
   }, [trainerId]);
 
-  //   const bookSession = () => {
-  //     if (
-  //       bookingInfo.modeOfTraining === "" ||
-  //       bookingInfo.workoutType === "" ||
-  //       bookingInfo.date === "" ||
-  //       bookingInfo.startTime === "" ||
-  //       bookingInfo.endTime === ""
-  //     ) {
-  //       toast.error("Please fill the booking details correctly!");
-  //     } else {
-  //       toast.success("Booking request sent for approval!");
-  //     }
-  //   };
+  const editBooking = async () => {
+    if (
+      bookingInfo.modeOfTraining === "" ||
+      bookingInfo.workoutType === "" ||
+      bookingInfo.date === "" ||
+      bookingInfo.startTime === "" ||
+      bookingInfo.endTime === ""
+    ) {
+      toast.error("Please fill the booking details correctly!");
+    } else {
+      try {
+        const response = await axios.patch(
+          `http://localhost:8000/api/bookings/update-booking-details/${bookingId}`,
+          {
+            date: bookingInfo.date,
+            customerId: user.id,
+            customerEmail: user.email,
+            customerName: user.name,
+            trainerName: trainer.name,
+            trainerId: trainer._id,
+            workoutType: bookingInfo.workoutType,
+            modeOfTraining: bookingInfo.modeOfTraining,
+            startTime: bookingInfo.startTime,
+            endTime: bookingInfo.endTime,
+            amount: (bookingInfo.endTime - bookingInfo.startTime) * 500,
+          }
+        );
+        toast.success(response.data.message);
+        navigate(`/customer/${user.id}/my-bookings`);
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    }
+  };
 
   return (
     <div className="w-full relative [background:linear-gradient(108.87deg,_#00101c,_#00101c,_#29000f)] shadow-[0px_4px_4px_rgba(0,_0,_0,_0.25)] overflow-hidden flex flex-col items-center justify-start pt-[3.813rem] pb-[3.875rem] pr-[3.438rem] pl-[1.25rem] box-border gap-[2.688rem_0rem] tracking-[normal] mq750:gap-[2.688rem_0rem] mq1275:pr-[1.688rem] mq1275:box-border">
@@ -62,13 +94,13 @@ const EditBooking = () => {
             <div className=" w-[85%] flex flex-col gap-5 m-auto">
               <div className=" w-full flex justify-between items-center ">
                 <img
-                  src={trainer.profilePicture}
+                  src={trainer && trainer.profilePicture}
                   className=" w-[8rem] h-[8rem] rounded-full"
                   alt=""
                 />
                 <div className=" flex justify-center items-center gap-2">
                   <h1 className="m-0 text-[1.6rem] font-semibold font-inherit mq450:text-[1.5rem] mq750:text-[2rem]">
-                    {trainer.name}
+                    {trainer && trainer.name}
                   </h1>
 
                   <img
@@ -161,52 +193,52 @@ const EditBooking = () => {
                     <option value="" className=" text-black">
                       Select
                     </option>
-                    <option value="0600" className=" text-black">
+                    <option value="06" className=" text-black">
                       06:00
                     </option>
-                    <option value="0700" className=" text-black">
+                    <option value="07" className=" text-black">
                       07:00
                     </option>
-                    <option value="0800" className=" text-black">
+                    <option value="08" className=" text-black">
                       08:00
                     </option>
-                    <option value="0900" className=" text-black">
+                    <option value="09" className=" text-black">
                       09:00
                     </option>
-                    <option value="1000" className=" text-black">
+                    <option value="10" className=" text-black">
                       10:00
                     </option>
-                    <option value="1100" className=" text-black">
+                    <option value="11" className=" text-black">
                       11:00
                     </option>
-                    <option value="1200" className=" text-black">
+                    <option value="12" className=" text-black">
                       12:00
                     </option>
-                    <option value="1300" className=" text-black">
+                    <option value="13" className=" text-black">
                       13:00
                     </option>
-                    <option value="1400" className=" text-black">
+                    <option value="14" className=" text-black">
                       14:00
                     </option>
-                    <option value="1500" className=" text-black">
+                    <option value="15" className=" text-black">
                       15:00
                     </option>
-                    <option value="1600" className=" text-black">
+                    <option value="16" className=" text-black">
                       16:00
                     </option>
-                    <option value="1700" className=" text-black">
+                    <option value="17" className=" text-black">
                       17:00
                     </option>
-                    <option value="1800" className=" text-black">
+                    <option value="18" className=" text-black">
                       18:00
                     </option>
-                    <option value="1900" className=" text-black">
+                    <option value="19" className=" text-black">
                       19:00
                     </option>
-                    <option value="2000" className=" text-black">
+                    <option value="20" className=" text-black">
                       20:00
                     </option>
-                    <option value="2100" className=" text-black">
+                    <option value="21" className=" text-black">
                       21:00
                     </option>
                   </select>
@@ -225,52 +257,52 @@ const EditBooking = () => {
                     <option value="" className=" text-black">
                       Select
                     </option>
-                    <option value="0700" className=" text-black">
+                    <option value="07" className=" text-black">
                       07:00
                     </option>
-                    <option value="0800" className=" text-black">
+                    <option value="08" className=" text-black">
                       08:00
                     </option>
-                    <option value="0900" className=" text-black">
+                    <option value="09" className=" text-black">
                       09:00
                     </option>
-                    <option value="1000" className=" text-black">
+                    <option value="10" className=" text-black">
                       10:00
                     </option>
-                    <option value="1100" className=" text-black">
+                    <option value="11" className=" text-black">
                       11:00
                     </option>
-                    <option value="1200" className=" text-black">
+                    <option value="12" className=" text-black">
                       12:00
                     </option>
-                    <option value="1300" className=" text-black">
+                    <option value="13" className=" text-black">
                       13:00
                     </option>
-                    <option value="1400" className=" text-black">
+                    <option value="14" className=" text-black">
                       14:00
                     </option>
-                    <option value="1500" className=" text-black">
+                    <option value="15" className=" text-black">
                       15:00
                     </option>
-                    <option value="1600" className=" text-black">
+                    <option value="16" className=" text-black">
                       16:00
                     </option>
-                    <option value="1700" className=" text-black">
+                    <option value="17" className=" text-black">
                       17:00
                     </option>
-                    <option value="1800" className=" text-black">
+                    <option value="18" className=" text-black">
                       18:00
                     </option>
-                    <option value="1900" className=" text-black">
+                    <option value="19" className=" text-black">
                       19:00
                     </option>
-                    <option value="2000" className=" text-black">
+                    <option value="20" className=" text-black">
                       20:00
                     </option>
-                    <option value="2100" className=" text-black">
+                    <option value="21" className=" text-black">
                       21:00
                     </option>
-                    <option value="2200" className=" text-black">
+                    <option value="22" className=" text-black">
                       22:00
                     </option>
                   </select>
@@ -278,10 +310,15 @@ const EditBooking = () => {
               </div>
               <div className=" w-full text-lg">
                 <div className=" w-full flex justify-between items-center ">
-                  <button className=" bg-red-500 w-[48%] py-2 rounded-lg">
-                    <Link to="/trainers">Cancel Booking</Link>
+                  <button className=" bg-sky-500  text-black font-semibold w-[48%] py-2 rounded-lg">
+                    <Link to={`/customer/${user.id}/my-bookings`}>
+                      My Bookings
+                    </Link>
                   </button>
-                  <button className=" bg-green-500 w-[48%] py-2 rounded-lg">
+                  <button
+                    className=" bg-green-500 text-black font-semibold w-[48%] py-2 rounded-lg"
+                    onClick={editBooking}
+                  >
                     Reschedule
                   </button>
                 </div>
@@ -290,7 +327,7 @@ const EditBooking = () => {
           </div>
         </div>
       </section>
-      {/* <ToastContainer /> */}
+      <ToastContainer />
     </div>
   );
 };
