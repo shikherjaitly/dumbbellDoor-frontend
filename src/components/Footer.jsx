@@ -2,8 +2,10 @@ import { useCallback } from "react";
 import { useNavigate } from 'react-router-dom';
 import logo from "../assets/dumbbelldoorLogo.png"
 import whatsApp from "../assets/whatsapp.svg"
+import { useCookies } from 'react-cookie';
 
 const FrameComponent = () => {
+  const [cookies] = useCookies(['role']);
   const navigate = useNavigate();
   
   const onFindTrainersText1Click = useCallback(() => {
@@ -103,12 +105,14 @@ const FrameComponent = () => {
               <h1 className="m-0 h-[1.438rem] relative text-inherit leading-[145%] capitalize inline-block shrink-0 cursor-pointer mq450:text-[1rem] mq450:leading-[1.438rem] hover:text-gray-500">
                 <p className="m-0">Home</p>
               </h1>
-              <h1
+              {cookies["role"] === "Customer" ? (
+              <h1 
                 className="m-0 h-[1.438rem] relative text-inherit leading-[145%] capitalize inline-block shrink-0 cursor-pointer mq450:text-[1rem] mq450:leading-[1.438rem]  hover:text-gray-500"
                 onClick={onFindTrainersText1Click}
               >
                 <p className="m-0">Find Trainers</p>
               </h1>
+              ) : null }
               <h1
                 className="m-0 self-stretch h-[1.438rem] relative text-inherit leading-[145%] capitalize inline-block shrink-0 cursor-pointer mq450:text-[1rem] mq450:leading-[1.438rem]  hover:text-gray-500"
                 onClick={onOurOfferingsText1Click}

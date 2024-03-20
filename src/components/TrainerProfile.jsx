@@ -5,8 +5,12 @@ import TrainerInfo from "./TrainerInfo.jsx";
 import TrainerRating from "./TrainerRating.jsx";
 import Navbar from "./Navbar";
 import { useUserContext } from "../utils/UserContext.js";
+import { useCookies } from 'react-cookie';
+
 
 const TrainerProfile = () => {
+  const [cookies] = useCookies(['id', 'role']); 
+
   const { trainerID } = useParams();
 
   const [trainer, setTrainer] = useState({});
@@ -42,15 +46,15 @@ const TrainerProfile = () => {
       <section className="self-stretch flex flex-col items-end justify-start gap-[4.625rem_0rem] mt-[-2rem] max-w-full mq450:gap-[4.625rem_0rem] mq750:gap-[4.625rem_0rem]">
         <TrainerInfo user={user} trainer={trainer} />
       </section>
-      {user && user.role === "Trainer" ? (
-        ""
-      ) : (
-        <div className=" w-full flex flex-row items-start justify-start py-[0rem] px-[0.75rem] box-border max-w-full">
-          <div className="flex-1 flex flex-row items-start justify-between gap-[1.25rem] max-w-full">
-            <TrainerRating />
+      {cookies["id"] ? (
+        cookies["role"] === "Trainer" ? null : (
+          <div className=" w-full flex flex-row items-start justify-start py-[0rem] px-[0.75rem] box-border max-w-full">
+            <div className="flex-1 flex flex-row items-start justify-between gap-[1.25rem] max-w-full">
+              <TrainerRating />
+            </div>
           </div>
-        </div>
-      )}
+        )
+      ) : null}
     </div>
   );
 };

@@ -15,8 +15,13 @@ import t3 from "../assets/t3.jpg";
 import { FaFacebookSquare } from "react-icons/fa";
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaSquareWhatsapp } from "react-icons/fa6";
+import { useCookies } from 'react-cookie';
 
-const LineSeparator = ({ trainer, user }) => {
+
+const LineSeparator = ({ trainer }) => {
+
+  const [cookies] = useCookies(['id', 'role']); 
+
   const onGroupButtonClick = useCallback(() => {
     // Please sync "Booking Page" to the project
   }, []);
@@ -71,9 +76,8 @@ const LineSeparator = ({ trainer, user }) => {
                             {trainer.phoneNumber}
                           </div>
                         </div>
-                        {user && user.role === "Trainer" ? (
-                          ""
-                        ) : (
+                        {cookies["id"] ? (
+                          cookies["role"] === "Trainer" ? null : ( 
                           <button
                             className="cursor-pointer [border:none] pt-2 pb-2 bg-yellowgreen self-stretch rounded-8xs flex flex-row items-center justify-center whitespace-nowrap hover:bg-forestgreen rounded-lg"
                             onClick={onGroupButtonClick}
@@ -85,7 +89,8 @@ const LineSeparator = ({ trainer, user }) => {
                               Book a session
                             </Link>
                           </button>
-                        )}
+                          ) 
+                        ): null}
                       </div>
                     </div>
                   </div>
@@ -102,26 +107,24 @@ const LineSeparator = ({ trainer, user }) => {
             <div className="h-[46rem] w-[0.063rem] relative object-contain" />
             <div className="w-[40.813rem] flex flex-col items-start justify-start pt-[2.625rem] px-[0rem] pb-[0rem] box-border max-w-full text-center text-[0.938rem] text-gray-200 font-rubik mq750:pt-[1.688rem] mq750:box-border">
               {" "}
-              {user && user.role === "Trainer" ? (
-                <section className=" w-full flex gap-4 justify-end mb-8">
-                  <button className=" px-6 py-2 border rounded-lg">
+              {cookies["id"] ? (
+                  cookies["role"] === "Trainer" ? (
+              <section className=" w-full flex gap-4 justify-end mb-8">
+                <Link to={`/trainer/${trainer._id}/my-bookings`} className=" px-6 py-2 border rounded-lg">
                     View Bookings
-                  </button>
-                  <button className=" px-6 py-2 border rounded-lg">
-                    Edit Profile
-                  </button>
-                </section>
-              ) : (
-                ""
-              )}
-              <div className=" flex flex-col items-start justify-start gap-[2.5rem_0rem] w-full mq750:gap-[2.5rem_0rem]">
-                <div className="flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.25rem] box-border w-full text-justify text-[1.125rem] text-white">
-                  <div className="flex-1 relative leading-[1.875rem] font-light inline-block w-full">
+                </Link >
+                <Link to="/trainer/build-your-profile" className=" px-6 py-2 border rounded-lg">
+                  Edit Profile
+                </Link> 
+              </section> ): null) : null}
+              <div className="self-stretch flex flex-col items-start justify-start gap-[2.5rem_0rem] max-w-full mq750:gap-[2.5rem_0rem]">
+                <div className="self-stretch flex flex-row items-start justify-start py-[0rem] pr-[0rem] pl-[0.25rem] box-border max-w-full text-justify text-[1.125rem] text-white">
+                  <div className="flex-1 relative leading-[1.875rem] font-light inline-block max-w-full">
                     {trainer.description}
                   </div>
                 </div>
-                <div className=" w-full flex flex-col gap-10 items-start justify-start pt-[0rem] px-[0rem] pb-[0.813rem] box-border mq750:flex-wrap">
-                  <div className=" w-full flex gap-4 justify-start items-center">
+                <div className=" w-full flex flex-col gap-10 items-start justify-start pt-[0rem] px-[0rem] pb-[0.813rem] box-border max-w-full mq750:flex-wrap">
+                  <div className=" flex gap-4 justify-center items-center">
                     <img
                       className="h-[3.75rem] w-[3.75rem] mr-4 relative object-cover"
                       loading="lazy"
@@ -146,7 +149,7 @@ const LineSeparator = ({ trainer, user }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="  w-full flex gap-4 justify-start items-center">
+                  <div className=" flex gap-4 justify-center items-center">
                     <img
                       className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
                       loading="lazy"
@@ -173,7 +176,7 @@ const LineSeparator = ({ trainer, user }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="  w-full flex gap-4 justify-start items-center">
+                  <div className=" flex gap-4 justify-center items-center">
                     <img
                       className="w-[3.75rem] h-[3.75rem] mr-4 relative"
                       loading="lazy"
@@ -198,56 +201,32 @@ const LineSeparator = ({ trainer, user }) => {
                       </div>
                     </div>
                   </div>
-                  <div className=" w-full flex gap-4 justify-start items-center">
+                  <div className=" flex gap-4 justify-center items-center">
                     <img
                       className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
                       loading="lazy"
                       alt=""
                       src={calendar}
                     />
-                    <div className="  w-full flex flex-col gap-2 items-start">
+                    <div className=" flex flex-col gap-2 items-start">
                       <p>A V A I L A B I L I T Y </p>
-                      <div className="w-full">
+                      <div>
                         <div className="w-full flex-1 flex flex-row items-start justify-start gap-[0rem_0.875rem]">
-                          {trainer && trainer.typesOfServices && (
-                            <table className=" w-full">
-                              <tr>
-                                <th className=" text-left text-gray-500 pb-2">
-                                  Sl no.
-                                </th>{" "}
-                                <th className=" text-left text-gray-500 pb-2">
-                                  Day
-                                </th>{" "}
-                                <th className=" text-left text-gray-500 pb-2">
-                                  Start Time
-                                </th>{" "}
-                                <th className=" text-left text-gray-500 pb-2">
-                                  End Time
-                                </th>{" "}
-                              </tr>
-                              {trainer.availability.map((schedule, index) => (
-                                <tr key={index} className=" w-full">
-                                  <td className=" text-left pb-1">
-                                    {index + 1}
-                                  </td>
-                                  <td className=" text-left pb-1">
-                                    {schedule.day}
-                                  </td>
-                                  <td className=" text-left pb-1">
-                                    {schedule.startTime}:00 hrs
-                                  </td>
-                                  <td className=" text-left pb-1">
-                                    {schedule.endTime}:00 hrs
-                                  </td>
-                                </tr>
-                              ))}
-                            </table>
-                          )}
+                          {trainer &&
+                            trainer.typesOfServices &&
+                            trainer.typesOfServices.map((service, index) => (
+                              <p
+                                key={index}
+                                className="  border-[0.05rem] border-gray-500 pt-1 pb-1 pr-4 pl-4 rounded-md"
+                              >
+                                {service}
+                              </p>
+                            ))}
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className=" w-full flex gap-4 justify-start items-center">
+                  <div className=" flex gap-4 justify-center items-center">
                     <img
                       className="w-[3.75rem] h-[3.75rem] mr-4 relative object-cover"
                       loading="lazy"
