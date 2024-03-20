@@ -5,12 +5,12 @@ import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
-import { useUserContext } from "../utils/UserContext.js";
+// import { useUserContext } from "../utils/UserContext.js";
 
 const TrainerRating = () => {
   const { trainerID } = useParams(); // Access trainerID from URL params
 
-  const { user } = useUserContext();
+  // const { user } = useUserContext();
   // Access user data from context
 
   const [cookies] = useCookies(['id']);
@@ -36,7 +36,7 @@ const TrainerRating = () => {
   // Function to submit feedback to backend
   const submitFeedback = async () => {
     try {
-      const { _id: user_id } = user; // Extract user ID from the user object
+      // const { _id: user_id } = user; // Extract user ID from the user object
 
       // Send rating data to backend along with user ID and trainer ID
       const response = await axios.post(
