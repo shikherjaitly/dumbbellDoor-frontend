@@ -23,7 +23,7 @@ DumbbellDoor introduces a pioneering platform facilitating personalized fitness 
 1. Clone the repository:
 
    ```bash
-   git clone <https://github.com/shikherjaitly/dumbbellDoor-frontend.git>
+   git clone https://github.com/shikherjaitly/dumbbellDoor-frontend.git
 
 2. Navigate to the project directory:
 
