@@ -75,12 +75,14 @@ const BookingPage = () => {
       toast.error("Please fill all the booking details correctly!");
     } else {
       try {
+        console.log(user);
         const response = await axios.post(
           "https://dumbbelldoor-backned.onrender.com/api/bookings/send-booking-details",
           {
             date: bookingInfo.date,
             customerId: user.id,
             customerEmail: user.email,
+            trainerEmail: trainer.email,
             customerName: user.name,
             trainerName: trainer.name,
             trainerId: trainer._id,

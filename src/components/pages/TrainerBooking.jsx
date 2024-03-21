@@ -1,18 +1,16 @@
 import "react-toastify/dist/ReactToastify.css";
 import Navbar from "../Navbar.jsx";
 import { Link } from "react-router-dom";
-import { FiEdit } from "react-icons/fi";
-import { useCookies } from 'react-cookie'; 
+import { useCookies } from "react-cookie";
 import { useUserContext } from "../../utils/UserContext.js";
 import { useEffect, useState } from "react";
-
 
 const TrainerBookings = () => {
   const { loginUser, user, getTrainerBookings } = useUserContext();
 
-  const [bookings] = useState([]);
+  const [bookings, setBookings] = useState([]);
   const [filteredBookings, setFilteredBookings] = useState([]);
-  const [cookies] = useCookies(['id']); // Initialize cookies
+  const [cookies] = useCookies(["id", "email"]); // Initialize cookies
 
   useEffect(() => {
     // Call the loginUser function when the component mounts
@@ -23,14 +21,15 @@ const TrainerBookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       const myBookings = user && (await getTrainerBookings(user.email));
-      // setBookings(myBookings);
-      // setFilteredBookings(myBookings);
+      setBookings(myBookings);
+      setFilteredBookings(myBookings);
       console.log(myBookings);
     };
     fetchBookings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
+  // console.log(cookies["email"]);
 
   const handleFilter = (status) => {
     if (status === "All") {
@@ -63,30 +62,30 @@ const TrainerBookings = () => {
             </div>
           </div>
           <section className=" flex gap-4">
-              <button
-                className=" text-sm border px-6 py-2 rounded-lg font-semibold"
-                onClick={() => handleFilter("All")}
-              >
-                All
-              </button>
-              <button
-                className=" text-sm px-6 py-2 rounded-lg bg-green-500 text-black font-semibold"
-                onClick={() => handleFilter("Upcoming")}
-              >
-                Upcoming
-              </button>
-              <button
-                className=" text-sm px-6 py-2 rounded-lg bg-sky-500 text-black font-semibold"
-                onClick={() => handleFilter("Completed")}
-              >
-                Completed
-              </button>
-              <button
-                className=" text-sm px-6 py-2 rounded-lg bg-yellow-500 text-black font-semibold"
-                onClick={() => handleFilter("Requested")}
-              >
-                Requested
-              </button>
+            <button
+              className=" text-sm border px-6 py-2 rounded-lg font-semibold"
+              onClick={() => handleFilter("All")}
+            >
+              All
+            </button>
+            <button
+              className=" text-sm px-6 py-2 rounded-lg bg-green-500 text-black font-semibold"
+              onClick={() => handleFilter("Upcoming")}
+            >
+              Upcoming
+            </button>
+            <button
+              className=" text-sm px-6 py-2 rounded-lg bg-sky-500 text-black font-semibold"
+              onClick={() => handleFilter("Completed")}
+            >
+              Completed
+            </button>
+            <button
+              className=" text-sm px-6 py-2 rounded-lg bg-yellow-500 text-black font-semibold"
+              onClick={() => handleFilter("Requested")}
+            >
+              Requested
+            </button>
           </section>
           <section className=" w-full text-lg ">
             <table className=" w-full">
@@ -100,26 +99,17 @@ const TrainerBookings = () => {
                 <th className=" py-3">Status</th>
               </tr>
               {filteredBookings &&
-                  filteredBookings.map((booking) => (
-                    <tr key={booking._id} className=" text-gray-400">
-                      <td className=" py-3">{booking.date}</td>
-                      <td className=" py-3">{booking.CustomerName}</td>
-                      <td className=" py-3">{booking.workoutType}</td>
-                      <td className=" py-3">{booking.startTime}00 hrs</td>
-                      <td className=" py-3">{booking.endTime}00 hrs</td>
-                      <td className=" py-3">Rs. {booking.amount}</td>
-                      <td className=" py-3">{booking.bookingStatus}</td>
-                      {booking.bookingStatus === "Requested" && (
-                        <td className=" cursor-pointer text-white ">
-                          <Link
-                            to={`/editBooking/${booking.trainerId}/${booking._id}`}
-                          >
-                            <FiEdit />
-                          </Link>
-                        </td>
-                      )}
-                    </tr>
-                  ))}
+                filteredBookings.map((booking) => (
+                  <tr key={booking._id} className=" text-gray-400">
+                    <td className=" py-3">{booking.date}</td>
+                    <td className=" py-3">{booking.customerName}</td>
+                    <td className=" py-3">{booking.workoutType}</td>
+                    <td className=" py-3">{booking.startTime}00 hrs</td>
+                    <td className=" py-3">{booking.endTime}00 hrs</td>
+                    <td className=" py-3">Rs. {booking.amount}</td>
+                    <td className=" py-3">{booking.bookingStatus}</td>
+                  </tr>
+                ))}
             </table>
           </section>
         </section>
