@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
-// import signup from "../../assets/signup_page.png";
-// import { FcGoogle } from "react-icons/fc";
 import dumbbelldoorLogo from "../../assets/dumbbelldoorLogo.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-// import Navbar from "../Navbar.jsx";
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +13,7 @@ const Signup = () => {
 
   
   const validatePassword = (password) => {
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*{}()])[A-Za-z\d!@#$%^&*]{8,}$/;
 
     if (!passwordRegex.test(password)) {
       let errorMessage = "Password must ";
@@ -69,10 +66,7 @@ const Signup = () => {
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
-  // const handleRoleChange = (e) => {
-  //   setRole(e.target.value);
-  // };
-
+  
   return (
     <div
       className="relative w-screen h-screen flex flex-col justify-center items-center"
@@ -93,16 +87,6 @@ const Signup = () => {
             <h1 className="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">
               Sign Up
             </h1>
-            {/* <div className="mb-2 flex justify-center py-2">
-              <button
-                type="submit"
-                className="px-10 py-1 my-4 flex items-center justify-center text-white bg-blue-600 rounded-full focus:bg-blue-700 focus:outline-none"
-                // onClick={handleGoogleLogin}
-              >
-                <FcGoogle className="mr-5" />
-                Signup with Google
-              </button>
-            </div> */}
           </div>
 
           {/* <hr className=" w-[90%] m-auto h-[0.05rem] bg-gray-500 border-0" /> */}
@@ -113,7 +97,7 @@ const Signup = () => {
             <form onSubmit={handleSubmit}>
               {/* Radio button Input */}
               <div className="w-[85%] mt-4 gap-4 flex justify-center m-auto items-center text-white font-style: Rubrik; ">
-                <div className=" flex justify-center items-center gap-2 grow px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 ">
+                <div className="w-[40%] flex justify-center items-center gap-2 grow px-3 py-3 placeholder-gray-300 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500 ">
                   <input
                     type="radio"
                     id="Trainee"
@@ -126,7 +110,7 @@ const Signup = () => {
 
                   <label htmlFor="Trainee">Customer</label>
                 </div>
-                <div className="flex justify-center items-center gap-2 grow px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500">
+                <div className="w-[40%] flex justify-center items-center gap-2 grow px-3 py-3 placeholder-gray-300 border border-gray-300 rounded-xl focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-transparent dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500">
                   <input
                     type="radio"
                     id="Trainer"
@@ -141,7 +125,7 @@ const Signup = () => {
               </div>
 
               {/* email and password */}
-              <div className="mb-6 mt-6">
+              <div className="mb-4 mt-6">
                 <label
                   for="email"
                   className="block mb-2 text-sm text-gray-600 dark:text-gray-400"
