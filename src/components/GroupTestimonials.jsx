@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import TestimonialsCarousel from "./TestimonialsCards";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import TrainerCard from "./TrainerCard";
 import { Button } from "@mui/material";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 
 const FrameComponent1 = () => {
-  const [cookies] = useCookies(['role']); 
+  const [cookies] = useCookies(["role"]);
   const [trainers, setTrainers] = useState([]);
 
   const getTrainers = async () => {
@@ -34,7 +35,6 @@ const FrameComponent1 = () => {
         </h1>
       </div>
       <div className="self-stretch flex flex-col flex-wrap items-center justify-center pt-[0rem] px-[0rem] pb-[1.188rem] gap-[0rem_1.188rem] text-[0.938rem] text-black">
-        <TrainerCard trainers={trainers.slice(0, 4)} />
         <Link to="/trainers">
           {cookies["role"] === "Customer" ? (
             <Button
@@ -53,8 +53,75 @@ const FrameComponent1 = () => {
               }}
             >
               More Trainers
-            </Button> )  : null }
+            </Button>
+          ) : null}
         </Link>
+        <div className="grid grid-cols-4 gap-14 ">
+          {trainers &&
+            trainers.slice(0, 4).map((trainer) => (
+              <div
+                key={trainer._id}
+                className="w-[12.5rem] shrink-0 flex flex-col items-center justify-start "
+              >
+                <img
+                  className="w-[8.125rem] h-[8.125rem] relative rounded-[50%] object-cover z-[1]"
+                  loading="eager"
+                  alt=""
+                  src={trainer.profilePicture}
+                />
+                <div className="self-stretch [background:linear-gradient(180deg,_rgba(236,_236,_236,_0),_#ececec)] flex flex-col items-center justify-start pt-[7.5rem] px-[0.813rem] pb-[1.25rem] gap-[0.875rem_0rem] mt-[-5.875rem] rounded-lg">
+                  <div className="w-[12.438rem] h-[14.875rem] relative rounded-3xs [background:linear-gradient(180deg,_rgba(236,_236,_236,_0),_#ececec)] hidden" />
+                  <div className="self-stretch flex flex-col items-start justify-start py-[0rem] px-[0.063rem] gap-[0.375rem_0rem]">
+                    <div className="self-stretch flex flex-row items-start justify-between gap-[1.25rem]">
+                      <div className="relative font-medium z-[1]">
+                        {trainer.name}
+                      </div>
+                      <div className="relative font-medium z-[1]">
+                        {trainer.rating} ⭐
+                      </div>
+                    </div>
+                    <img
+                      className="self-stretch h-[0.063rem] relative max-w-full overflow-hidden shrink-0 object-contain z-[1]"
+                      alt=""
+                      src="/line-1.svg"
+                    />
+                    <div className="flex flex-col items-start justify-start text-[0.625rem]">
+                      <div className="relative leading-[145%] capitalize z-[1] font-medium">
+                        Specializations :
+                      </div>
+                      <div className=" flex gap-2">
+                        {trainer.specializations.map(
+                          (specialization, index) => (
+                            <p
+                              key={index}
+                              className="relative leading-[145%] capitalize z-[1]"
+                            >
+                              {specialization}
+                            </p>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex flex-row items-start justify-start gap-[0rem_1.25rem] text-[0.625rem]">
+                    <span className=" text-2xl cursor-pointer">
+                      <FaFacebook />
+                    </span>
+                    <span className=" text-2xl cursor-pointer">
+                      <FaInstagram />
+                    </span>
+
+                    <Link
+                      to={`/trainer/${trainer._id}`}
+                      className=" bg-white flex flex-row items-center justify-center pt-[0.188rem] pb-[0.25rem] pr-[0.813rem] pl-[0.75rem] whitespace-nowrap z-[1] cursor-pointer rounded-xl font-normal hover:bg-black hover:text-white transition-all"
+                    >
+                      Check profile
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
       </div>
       <TestimonialsCarousel />
     </div>

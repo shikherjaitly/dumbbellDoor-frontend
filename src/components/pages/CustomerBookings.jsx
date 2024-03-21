@@ -13,7 +13,7 @@ const CustomerBookings = () => {
 
   useEffect(() => {
     // Call the loginUser function when the component mounts
-    loginUser();
+    user && loginUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array ensures this effect runs only once
 
@@ -83,41 +83,52 @@ const CustomerBookings = () => {
               >
                 Requested
               </button>
-            </section>
-            <section className=" w-full text-lg ">
-              <table className=" w-full">
-                <tr>
-                  <th className=" py-3">Date</th>
-                  <th className=" py-3">Trainer</th>
-                  <th className=" py-3">Workout Type</th>
-                  <th className=" py-3">Start Time</th>
-                  <th className=" py-3">End Time</th>
-                  <th className=" py-3">Amount Paid</th>
-                  <th className=" py-3">Status</th>
-                </tr>
-                {filteredBookings &&
-                  filteredBookings.map((booking) => (
-                    <tr key={booking._id} className=" text-gray-400">
-                      <td className=" py-3">{booking.date} </td>
-                      <td className=" py-3">{booking.trainerName}</td>
-                      <td className=" py-3">{booking.workoutType}</td>
-                      <td className=" py-3">{booking.startTime}00 hrs</td>
-                      <td className=" py-3">{booking.endTime}00 hrs</td>
-                      <td className=" py-3">Rs. {booking.amount}</td>
-                      <td className=" py-3">{booking.bookingStatus}</td>
-                      {booking.bookingStatus === "Requested" && (
-                        <td className=" cursor-pointer text-white ">
-                          <Link
-                            to={`/editBooking/${booking.trainerId}/${booking._id}`}
-                          >
-                            <FiEdit />
-                          </Link>
-                        </td>
-                      )}
-                    </tr>
-                  ))}
-              </table>
-            </section>
+            </section>{" "}
+            {filteredBookings && filteredBookings.length !== 0 ? (
+              <section className=" w-full text-lg ">
+                <table className=" w-full">
+                  <tr>
+                    <th className=" py-3">Date</th>
+                    <th className=" py-3">Trainer</th>
+                    <th className=" py-3">Workout Type</th>
+                    <th className=" py-3">Start Time</th>
+                    <th className=" py-3">End Time</th>
+                    <th className=" py-3">Amount Paid</th>
+                    <th className=" py-3">Status</th>
+                  </tr>
+                  {filteredBookings &&
+                    filteredBookings.map((booking) => (
+                      <tr key={booking._id} className=" text-gray-400">
+                        <td className=" py-3">{booking.date} </td>
+                        <td className=" py-3">{booking.trainerName}</td>
+                        <td className=" py-3">{booking.workoutType}</td>
+                        <td className=" py-3">{booking.startTime}00 hrs</td>
+                        <td className=" py-3">{booking.endTime}00 hrs</td>
+                        <td className=" py-3">Rs. {booking.amount}</td>
+                        <td className=" py-3">{booking.bookingStatus}</td>
+                        {booking.bookingStatus === "Requested" && (
+                          <td className=" cursor-pointer text-white ">
+                            <Link
+                              to={`/editBooking/${booking.trainerId}/${booking._id}`}
+                            >
+                              <FiEdit />
+                            </Link>
+                          </td>
+                        )}
+                      </tr>
+                    ))}
+                </table>
+              </section>
+            ) : (
+              <div className=" w-full flex flex-col gap-4 justify-center items-center mt-20">
+                <h1 className=" w-full text-center font-semibold">
+                  No bookings yet!{" "}
+                </h1>
+                <Link className=" text-lg text-sky-500  mt-4" to="/trainers">
+                  select your trainer here
+                </Link>
+              </div>
+            )}
           </section>
         </main>
       )}
