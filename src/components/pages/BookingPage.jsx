@@ -77,8 +77,7 @@ const BookingPage = () => {
       try {
         console.log(user);
         const response = await axios.post(
-          // "https://dumbbelldoor-backned.onrender.com/api/bookings/send-booking-details",
-          "http://localhost:8000/api/bookings/send-booking-details",
+          "https://dumbbelldoor-backned.onrender.com/api/bookings/send-booking-details",
           {
             date: bookingInfo.date,
             customerId: user.id,
