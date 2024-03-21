@@ -33,8 +33,7 @@ const TrainerRegistration = () => {
   // const userEmail = cookieObj["email"];
   // const userAccessToken = cookieObj["token"];
   const userId = cookieObj["id"];
-
-  console.log(userId);
+  const userEmail = cookieObj["email"];
 
   useEffect(() => {
     // Call the loginUser function when the component mounts
@@ -81,7 +80,7 @@ const TrainerRegistration = () => {
     const formData = new FormData();
 
     // Append each field to FormData
-    formData.append("email", user.email);
+    formData.append("email", userEmail);
     formData.append("name", trainerInfo.name);
     formData.append("gender", trainerInfo.gender);
     formData.append("profilePicture", trainerInfo.profilePicture);
