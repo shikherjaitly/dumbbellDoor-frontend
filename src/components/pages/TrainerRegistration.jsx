@@ -9,6 +9,10 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useUserContext } from "../../utils/UserContext";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
 
 const steps = [
   "Personal Details",
@@ -123,11 +127,21 @@ const TrainerRegistration = () => {
   // Handler for file change
   const handleFileChange = (e) => {
     const file = e.target.files[0]; // Get the selected file
+    const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
+    // Check if the selected file format is allowed
+    if (file && allowedFormats.includes(file.type)) {
     setTrainerInfo({
       ...trainerInfo,
       profilePicture: file, // Update the profilePicture in state
-    });
+      });
+
+    } else {
+      toast.error("Please select a valid image file (JPEG, JPG, or PNG).");
+      // Clear the file input
+      e.target.value = null;
+    }
   };
+
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
@@ -488,6 +502,7 @@ const TrainerRegistration = () => {
           )}
         </Box>
       </div>
+      <ToastContainer />
     </div>
   );
 };

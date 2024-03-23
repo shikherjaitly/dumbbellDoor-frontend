@@ -30,16 +30,28 @@ const CustomerRegistration = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Validation functions
-    const isValidName = /^[a-zA-Z\s]*$/.test(value) && value.length <= 30;
-    // Show error message for invalid name
-    if (name === "name" && !isValidName) {
-      toast.error("Name should contain only letters and be less than 30 characters");
+    
+    // update the state with the new value
+    setCustomerInfo((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  // Function to handle file change with validation
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]; // Get the selected file
+    const allowedFormats = ["image/jpeg", "image/jpg", "image/png"];
+    // Check if the selected file format is allowed
+    if (file && allowedFormats.includes(file.type)) {
+      setCustomerInfo({
+        ...customerInfo,
+        profilePicture: file, // Update the profilePicture in state
+      });
     } else {
-      setCustomerInfo((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+      toast.error("Please select a valid image file (JPEG, JPG, or PNG).");
+      // Clear the file input
+      e.target.value = null;
     }
   };
 
@@ -72,7 +84,58 @@ const CustomerRegistration = () => {
   //   };
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
+
+    // name Validation 
+    const isValidName = /^[a-zA-Z\s]*$/.test(customerInfo.name) && customerInfo.name.length <= 30;
+    // Show error message for invalid name
+    if (!isValidName) {
+      toast.error("Name should contain only letters and be less than 30 characters");
+      return;
+    } 
+    
+    // age validator
+   
+      // Check if the value is a positive integer and within the range of 1 to 100
+      const isValidAge = /^\d+$/.test(customerInfo.age) && parseInt(customerInfo.age) > 18 && parseInt(customerInfo.age) <= 70;
+      if (!isValidAge) {
+        toast.error("Age should be a positive integer between 18 and 70.");
+        return; // Exit the function without updating state if age is invalid
+      }
+   
+
+    // phone number validator
+    
+      // Ensure that only the first input field is handled here
+      
+        // Check if the value matches the format of "+91" followed by 10 digits
+        const isValidPhoneNumber = customerInfo.phoneNumber.length === 10;
+        if (!isValidPhoneNumber) {
+          toast.error("Please enter a valid phone number with 10 digits!");
+          return; // Exit the function without updating state if phone number is invalid
+        }
+  
+
+
+     // Validation for weight and height fields
+   
+      // Check if the value is a positive number and within the range of 0 to 200 kg
+      const isValidWeight = /^[0-9]*\.?[0-9]+$/.test(customerInfo.weight) && parseFloat(customerInfo.weight) > 0 && parseFloat(customerInfo.weight) <= 200;
+      if (!isValidWeight) {
+        toast.error("Please enter a valid weight in kg (0 to 200).");
+        return; // Exit the function without updating state if the value is invalid
+      }
+    
+      // Check if the value is a positive number and within the range of 0 to 300 cm
+      const isValidHeight = /^[0-9]*\.?[0-9]+$/.test(customerInfo.height) && parseFloat(customerInfo.height) > 0 && parseFloat(customerInfo.height) <= 300;
+      if (!isValidHeight) {
+        toast.error("Please enter a valid height in cm (0 to 300).");
+        return; // Exit the function without updating state if the value is invalid
+      }
+
+
+
     const formData = new FormData();
     formData.append("name", customerInfo.name);
     formData.append("email", user.email);
@@ -119,6 +182,7 @@ const CustomerRegistration = () => {
             autoComplete="off"
             placeholder="Name"
             name="name"
+            required
             onChange={handleChange}
             value={customerInfo.name}
           />
@@ -126,6 +190,7 @@ const CustomerRegistration = () => {
             className="w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none"
             name="gender"
             id="gender"
+            required
             onChange={handleChange}
             value={customerInfo.gender}
           >
@@ -141,14 +206,17 @@ const CustomerRegistration = () => {
           </select>
           <input
             type="file"
+            required
+            accept=".jpg, .jpeg, .png"
             className="w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none"
             name="profilePicture"
-            onChange={handleChange}
+            onChange={handleFileChange}
           />
           <select
             className="w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
             autoComplete="off"
             placeholder="Location"
+            required
             name="location"
             onChange={handleChange}
             value={customerInfo.location}
@@ -164,6 +232,7 @@ const CustomerRegistration = () => {
             className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
             placeholder="Language"
             name="language"
+            required
             onChange={handleChange}
             value={customerInfo.language}
           >
@@ -175,17 +244,21 @@ const CustomerRegistration = () => {
           </select>
           <input
             type="number"
-            className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
-            autoComplete="off"
+            className="w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none"
             placeholder="Age"
             name="age"
+            required
             onChange={handleChange}
             value={customerInfo.age}
+            min="1"
+            max="100"
           />
+          {/* Second input field */}
           <input
-            type="string"
-            className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
+            type="tel"
+            className="w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none"
             autoComplete="off"
+            required
             placeholder="Phone Number"
             name="phoneNumber"
             onChange={handleChange}
@@ -196,6 +269,7 @@ const CustomerRegistration = () => {
             className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
             placeholder="Weight in Kg"
             name="weight"
+            required
             onChange={handleChange}
             value={customerInfo.weight}
           />
@@ -204,6 +278,7 @@ const CustomerRegistration = () => {
             className=" w-full p-4 bg-transparent border border-gray-500 rounded-md outline-none "
             placeholder="Height in cm"
             name="height"
+            required
             onChange={handleChange}
             value={customerInfo.height}
           />

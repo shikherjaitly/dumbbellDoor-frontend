@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/dumbbelldoorLogo.png";
 import whatsApp from "../assets/whatsapp.svg";
@@ -7,6 +7,22 @@ import { useCookies } from "react-cookie";
 const FrameComponent = () => {
   const [cookies] = useCookies(["role"]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Scroll to the bottom when the component mounts
+    const scrollToBottom = () => {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    };
+
+    // Check if the URL has a hash fragment for contact
+    if (window.location.hash === "#contact") {
+      scrollToBottom();
+    }
+  }, []); // Only run once when the component mounts
+
 
   const onFindTrainersText1Click = useCallback(() => {
     navigate("/trainers");
@@ -96,7 +112,7 @@ const FrameComponent = () => {
             </div>
           </div>
         </div>
-        <div className="w-[17.188rem] flex flex-col items-start justify-start pt-[2rem] px-[0rem] pb-[0rem] box-border">
+        <div id="contact" className="w-[17.188rem] flex flex-col items-start justify-start pt-[2rem] px-[0rem] pb-[0rem] box-border">
           <div className="flex flex-col items-start justify-start gap-[1.313rem_0rem]">
             <h1 className="m-0 relative text-inherit leading-[145%] capitalize font-normal font-inherit mq450:text-[1.125rem] mq450:leading-[1.625rem] mq800:text-[1.5rem] mq800:leading-[2.188rem]">
               Utility Pages
