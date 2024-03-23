@@ -11,6 +11,13 @@ const Navbar = () => {
   const [cookies] = useCookies([]);
   const navigate = useNavigate();
 
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+  
   useEffect(() => {
     user && loginUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,14 +92,13 @@ const Navbar = () => {
             ) : null}{" "}
           </li>
           <li>
-            <Link className="text-lg text-gray-400 hover:text-gray-500 transition-all">
-              Testimonials
-            </Link>
-          </li>
-          <li>
-            <Link className="text-lg text-gray-400 hover:text-gray-500 transition-all">
-              Contact Us
-            </Link>
+          <Link
+            to="/#contact"
+            className="text-lg text-gray-400 hover:text-gray-500 transition-all"
+            onClick={scrollToBottom}
+          >
+          Contact Us
+          </Link>
           </li>
           <li>
             <Link

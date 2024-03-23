@@ -27,6 +27,7 @@ const EditCustomerProfile = ({ user, setOpen }) => {
     }));
   };
 
+
   // List of metro city locations in India
   const metroCities = [
     "Select location",
@@ -48,6 +49,56 @@ const EditCustomerProfile = ({ user, setOpen }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    
+    // name Validation 
+    const isValidName = /^[a-zA-Z\s]*$/.test(customerInfo.name) && customerInfo.name.length <= 30;
+    // Show error message for invalid name
+    if (!isValidName) {
+      toast.error("Name should contain only letters and be less than 30 characters");
+      return;
+    } 
+    
+    // age validator
+   
+      // Check if the value is a positive integer and within the range of 1 to 100
+      const isValidAge = /^\d+$/.test(customerInfo.age) && parseInt(customerInfo.age) > 18 && parseInt(customerInfo.age) <= 70;
+      if (!isValidAge) {
+        toast.error("Age should be a positive integer between 18 and 70.");
+        return; // Exit the function without updating state if age is invalid
+      }
+   
+
+    // phone number validator
+    
+      // Ensure that only the first input field is handled here
+      
+        // Check if the value matches the format of "+91" followed by 10 digits
+        const isValidPhoneNumber = customerInfo.phoneNumber.length === 10;
+        if (!isValidPhoneNumber) {
+          toast.error("Please enter a valid phone number with 10 digits!");
+          return; // Exit the function without updating state if phone number is invalid
+        }
+  
+
+
+     // Validation for weight and height fields
+   
+      // Check if the value is a positive number and within the range of 0 to 200 kg
+      const isValidWeight = /^[0-9]*\.?[0-9]+$/.test(customerInfo.weight) && parseFloat(customerInfo.weight) > 0 && parseFloat(customerInfo.weight) <= 200;
+      if (!isValidWeight) {
+        toast.error("Please enter a valid weight in kg (0 to 200).");
+        return; // Exit the function without updating state if the value is invalid
+      }
+    
+      // Check if the value is a positive number and within the range of 0 to 300 cm
+      const isValidHeight = /^[0-9]*\.?[0-9]+$/.test(customerInfo.height) && parseFloat(customerInfo.height) > 0 && parseFloat(customerInfo.height) <= 300;
+      if (!isValidHeight) {
+        toast.error("Please enter a valid height in cm (0 to 300).");
+        return; // Exit the function without updating state if the value is invalid
+      }
+
+
     const formData = new FormData();
     formData.append("name", customerInfo.name);
     formData.append("email", user.email);
